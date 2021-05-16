@@ -1,0 +1,71 @@
+<div *ngIf="error">
+  <app-error [message]="errorMessage"></app-error>
+</div>
+
+<div *ngIf="!loading">
+
+  <div class="row btn-toolbar">
+    <div class="mr-auto">
+      <button type="button" class="btn btn-primary"
+              [disabled]="!prev" (click)="onPrev()">&lt;
+      </button>
+      <button type="button" class="btn btn-primary"
+              [disabled]="!next" (click)="onNext()">&gt;
+      </button>
+    </div>
+    <div class="ml-auto">
+      <button type="button" class="btn btn-success" (click)="onBack()">Back
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <ng-container>
+        <h3 *ngIf="airport.name; else no_name">{{airport.name}} ({{airport.icao}})</h3>
+        <ng-template #no_name>
+          <h3>{{airport.icao}}</h3>
+        </ng-template>
+      </ng-container>
+      <h5>{{airport.region}}</h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead class="thead-dark">
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Airline</th>
+            <th>Plane</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let flight of airport.flights">
+            <td class="row-plane" (click)="onDay(flight.date)">
+              <div class="table-link" (click)="onDay(flight.date)">{{flight.date | date: 'dd.MM.yy'}}</div>
+            </td>
+            <td>{{flight.time | slice:0:8}}</td>
+            <td>
+              <div class="table-link" (click)="onAirline(flight.airline.icao)">
+                {{flight.airline.name ? flight.airline.name : flight.airline.icao}}
+              </div>
+            </td>
+            <td class="table-link" (click)="onPlane(flight.plane.icao)">{{flight.plane.icao}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <app-footer></app-footer>
+    </div>
+  </div>
+
+</div>
