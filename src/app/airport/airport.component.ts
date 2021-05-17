@@ -13,7 +13,7 @@ import {Airport} from '../model/graphql/airport.model';
 })
 export class AirportComponent implements OnInit {
   airport: Airport;
-  offset = 0;
+  page = 0;
   prev = false;
   next: boolean;
   loading: boolean;
@@ -26,14 +26,14 @@ export class AirportComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.sendQuery(this.route.snapshot.params.icao, this.offset);
+    this.sendQuery(this.route.snapshot.params.icao, this.page);
   }
 
-  private sendQuery(icao: string, offset: number) {
+  private sendQuery(icao: string, page: number) {
     this.client
       .query({
         query: GET_FLIGHTS_OF_AIRPORT,
-        variables: {icao, offset}
+        variables: {icao, page}
       }).subscribe(({data, loading}) => {
         this.loading = loading;
         // @ts-ignore
@@ -52,17 +52,17 @@ export class AirportComponent implements OnInit {
   }
 
   onPrev() {
-    this.offset -= 20;
-    if (this.offset === 0) {
+    this.page--;
+    if (this.page === 0) {
       this.prev = false;
     }
-    this.sendQuery(this.airport.icao, this.offset);
+    this.sendQuery(this.airport.icao, this.page);
   }
 
   onNext() {
-    this.offset += 20;
+    this.page++;
     this.prev = true;
-    this.sendQuery(this.airport.icao, this.offset);
+    this.sendQuery(this.airport.icao, this.page);
   }
 
   onBack() {

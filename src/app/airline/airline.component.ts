@@ -13,7 +13,7 @@ import {GET_FLIGHTS_OF_AIRLINE} from './query';
 })
 export class AirlineComponent implements OnInit {
   airline: Airline;
-  offset = 0;
+  page = 0;
   prev = false;
   next: boolean;
   loading: boolean;
@@ -26,15 +26,14 @@ export class AirlineComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    const icao = this.route.snapshot.params.icao;
-    this.sendQuery(icao, this.offset);
+    this.sendQuery(this.route.snapshot.params.icao, this.page);
   }
 
-  private sendQuery(icao: string, offset: number) {
+  private sendQuery(icao: string, page: number) {
     this.client
       .query({
         query: GET_FLIGHTS_OF_AIRLINE,
-        variables: {icao, offset}
+        variables: {icao, page}
       }).subscribe(({data, loading}) => {
         this.loading = loading;
         // @ts-ignore
@@ -53,17 +52,17 @@ export class AirlineComponent implements OnInit {
   }
 
   onPrev() {
-    this.offset -= 20;
-    if (this.offset === 0) {
+    this.page--;
+    if (this.page === 0) {
       this.prev = false;
     }
-    this.sendQuery(this.airline.icao, this.offset);
+    this.sendQuery(this.airline.icao, this.page);
   }
 
   onNext() {
-    this.offset += 20;
+    this.page++;
     this.prev = true;
-    this.sendQuery(this.airline.icao, this.offset);
+    this.sendQuery(this.airline.icao, this.page);
   }
 
   onBack() {
