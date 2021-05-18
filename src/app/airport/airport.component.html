@@ -7,10 +7,15 @@
   <div class="row btn-toolbar">
     <div class="mr-auto">
       <button type="button" class="btn btn-primary"
-              [disabled]="!prev" (click)="onPrev()">&lt;
+              [disabled]="page.pageNumber === 0" (click)="onPrev()">&lt;
       </button>
       <button type="button" class="btn btn-primary"
-              [disabled]="!next" (click)="onNext()">&gt;
+              [disabled]="page.pageNumber === page.totalPages - 1" (click)="onNext()">&gt;
+      </button>
+      <button type="button" class="btn btn-primary"
+              [hidden]="page.totalPages === 1"
+              [disabled]="page.pageNumber === page.totalPages - 1" (click)="onLast()">
+        {{page.totalPages}}
       </button>
     </div>
     <div class="ml-auto">
@@ -22,7 +27,7 @@
   <div class="row">
     <div class="col">
       <ng-container>
-        <h3 *ngIf="airport.name; else no_name">{{airport.name}} ({{airport.icao}})</h3>
+        <h3 *ngIf="airport.name !== undefined; else no_name">{{airport.name}} ({{airport.icao}})</h3>
         <ng-template #no_name>
           <h3>{{airport.icao}}</h3>
         </ng-template>
@@ -44,14 +49,14 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let flight of airport.flights">
+          <tr *ngFor="let flight of page.content">
             <td class="row-plane" (click)="onDay(flight.date)">
               <div class="table-link" (click)="onDay(flight.date)">{{flight.date | date: 'dd.MM.yy'}}</div>
             </td>
             <td>{{flight.time | slice:0:8}}</td>
             <td>
               <div class="table-link" (click)="onAirline(flight.airline.icao)">
-                {{flight.airline.name ? flight.airline.name : flight.airline.icao}}
+                {{flight.airline.name !== undefined ? flight.airline.name : flight.airline.icao}}
               </div>
             </td>
             <td class="table-link" (click)="onPlane(flight.plane.icao)">{{flight.plane.icao}}</td>

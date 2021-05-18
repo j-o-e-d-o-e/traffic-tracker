@@ -3,8 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Apollo} from 'apollo-angular';
 import {DataService} from '../service/data.service';
-import {GET_FLIGHTS_OF_AIRPORT} from './query';
+import {GET_FLIGHTS_FROM_AIRPORT, GET_FLIGHTS_FROM_AIRPORT_INITIAL} from './query';
 import {Airport} from '../model/graphql/airport.model';
+import {Page} from '../model/graphql/page.model';
 
 @Component({
   selector: 'app-airport',
@@ -13,9 +14,7 @@ import {Airport} from '../model/graphql/airport.model';
 })
 export class AirportComponent implements OnInit {
   airport: Airport;
-  page = 0;
-  prev = false;
-  next: boolean;
+  page: Page;
   loading: boolean;
   error = false;
   errorMessage: string;
@@ -26,18 +25,20 @@ export class AirportComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.sendQuery(this.route.snapshot.params.icao, this.page);
+    this.sendFirstQuery(this.route.snapshot.params.icao, 0);
   }
 
-  private sendQuery(icao: string, page: number) {
+  private sendFirstQuery(icao: string, page: number) {
     this.client
       .query({
-        query: GET_FLIGHTS_OF_AIRPORT,
+        query: GET_FLIGHTS_FROM_AIRPORT_INITIAL,
         variables: {icao, page}
       }).subscribe(({data, loading}) => {
         this.loading = loading;
         // @ts-ignore
-        this.setData(data.departure);
+        this.airport = data.departure;
+        // @ts-ignore
+        this.setData(data.flightsFromAirport);
       },
       (error: any) => {
         this.error = true;
@@ -45,24 +46,37 @@ export class AirportComponent implements OnInit {
       });
   }
 
-  private setData(airport: Airport) {
-    this.airport = airport;
-    // console.log(this.airport);
-    this.next = airport.flights.length === 20;
+  private sendQuery(icao: string, page: number) {
+    this.client
+      .query({
+        query: GET_FLIGHTS_FROM_AIRPORT,
+        variables: {icao, page}
+      }).subscribe(({data, loading}) => {
+        this.loading = loading;
+        // @ts-ignore
+        this.setData(data.flightsFromAirport);
+      },
+      (error: any) => {
+        this.error = true;
+        this.errorMessage = error.message;
+      });
+  }
+
+  private setData(page: Page) {
+    this.page = page;
+    // console.log(this.page);
   }
 
   onPrev() {
-    this.page--;
-    if (this.page === 0) {
-      this.prev = false;
-    }
-    this.sendQuery(this.airport.icao, this.page);
+    this.sendQuery(this.airport.icao, this.page.pageNumber - 1);
   }
 
   onNext() {
-    this.page++;
-    this.prev = true;
-    this.sendQuery(this.airport.icao, this.page);
+    this.sendQuery(this.airport.icao, this.page.pageNumber + 1);
+  }
+
+  onLast() {
+    this.sendQuery(this.airport.icao, this.page.totalPages - 1);
   }
 
   onBack() {

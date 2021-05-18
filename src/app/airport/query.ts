@@ -1,12 +1,17 @@
 import {gql} from 'apollo-angular';
 
-export const GET_FLIGHTS_OF_AIRPORT = gql`
-  query GetFlightsOfAirport($icao: ID!, $page: Int!){
+export const GET_FLIGHTS_FROM_AIRPORT_INITIAL = gql`
+  query GetFlightsFromAirport($icao: String!, $page: Int!) {
     departure(icao: $icao) {
       id
       icao
       name
-      flights(page: $page, size: 20) {
+    }
+    flightsFromAirport(icao: $icao, page: $page, size: 20) {
+      totalPages
+      totalElements
+      pageNumber
+      content {
         id
         date
         time
@@ -21,4 +26,29 @@ export const GET_FLIGHTS_OF_AIRPORT = gql`
         }
       }
     }
-  }`;
+  }
+`;
+
+export const GET_FLIGHTS_FROM_AIRPORT = gql`
+  query GetFlightsFromAirport($icao: String!, $page: Int!) {
+    flightsFromAirport(icao: $icao, page: $page, size: 20) {
+      totalPages
+      totalElements
+      pageNumber
+      content {
+        id
+        date
+        time
+        airline {
+          id
+          icao
+          name
+        }
+        plane {
+          id
+          icao
+        }
+      }
+    }
+  }
+`;
