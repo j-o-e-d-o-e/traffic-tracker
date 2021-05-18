@@ -7,15 +7,16 @@
   <div class="row btn-toolbar">
     <div class="mr-auto">
       <button type="button" class="btn btn-primary"
-              [disabled]="page.pageNumber === 0" (click)="onPrev()">&lt;
+              [disabled]="flights._links.prev === undefined" (click)="onPrev()">&lt;
       </button>
       <button type="button" class="btn btn-primary"
-              [disabled]="page.pageNumber === page.totalPages - 1" (click)="onNext()">&gt;
+              [disabled]="flights._links.next === undefined" (click)="onNext()">&gt;
       </button>
       <button type="button" class="btn btn-primary"
-              [hidden]="page.totalPages === 1"
-              [disabled]="page.pageNumber === page.totalPages - 1" (click)="onLast()">
-        {{page.totalPages}}
+              [hidden]="flights._links.last === undefined"
+              [disabled]="flights._links.last !== undefined &&
+              flights._links.self.href === flights._links.last.href" (click)="onLast()">
+        {{flights.page.totalPages}}
       </button>
     </div>
     <div class="ml-auto">
@@ -26,7 +27,9 @@
 
   <div class="row">
     <div class="col">
-      <h3>{{icao}}</h3>
+      <h3>
+        {{flights._embedded.flightDtoes[0].icao_24}}
+      </h3>
     </div>
   </div>
 
@@ -44,19 +47,19 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let flight of page.content">
+          <tr *ngFor="let flight of flights._embedded.flightDtoes">
             <td class="table-link" (click)="onDay(flight.date)">
-              <a>{{flight.date | date: 'dd.MM.yy'}}</a>
+              <a>{{flight.date_time | date: 'dd.MM.yy'}}</a>
             </td>
-            <td>{{flight.time | slice:0:5}}</td>
+            <td>{{flight.date_time | date: 'HH:mm'}}</td>
             <td>{{flight.callsign}}</td>
-            <td class="table-link" (click)="onAirline(flight.airline.icao)">
-              {{flight.airline.name ? flight.airline.name : flight.airline.icao}}
+            <td class="table-link" (click)="onAirline(flight.airline_icao)">
+              {{flight.airline_name ? flight.airline_name : flight.airline_icao}}
             </td>
             <ng-container *ngIf="checkDate(flight.date); else before_departure_start_date">
-              <td class="table-link" *ngIf="flight.departure !== undefined; else no_airport"
-                  (click)="onAirport(flight.departure.icao)">
-                {{flight.departure.name ? flight.departure.name : flight.departure.icao}}
+              <td class="table-link" *ngIf="flight.departure_icao; else no_airport"
+                  (click)="onAirport(flight.departure_icao)">
+                {{flight.departure_name ? flight.departure_name : flight.departure_icao}}
               </td>
               <ng-template #no_airport>
                 <td>{{"Unknown"}}</td>

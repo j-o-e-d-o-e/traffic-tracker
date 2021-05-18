@@ -1,9 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {APOLLO_OPTIONS} from 'apollo-angular';
 import {HttpLink} from 'apollo-angular/http';
 import {InMemoryCache} from '@apollo/client/core';
@@ -18,7 +18,7 @@ import {MonthComponent} from './month/month.component';
 import {YearComponent} from './year/year.component';
 import {FlightsComponent} from './flights/flights.component';
 import {HomeComponent} from './home/home.component';
-import {PlaneComponent} from './plane/plane.component';
+import {PlaneRestComponent} from './plane-rest/plane-rest.component';
 import {ForecastComponent} from './forecast/forecast.component';
 import {ErrorComponent} from './error/error.component';
 import {StatsComponent} from './stats/stats.component';
@@ -26,8 +26,9 @@ import {DepartureComponent} from './departure-pie/departure.component';
 import {FormsModule} from '@angular/forms';
 import {ChartsModule} from 'ng2-charts';
 import {TooltipModule} from 'ng2-tooltip-directive';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AirportComponent} from './airport/airport.component';
+import {PlaneComponent} from './plane/plane.component';
 
 @NgModule({
   declarations: [
@@ -40,13 +41,14 @@ import {AirportComponent} from './airport/airport.component';
     YearComponent,
     FlightsComponent,
     HomeComponent,
-    PlaneComponent,
+    PlaneRestComponent,
     ForecastComponent,
     ErrorComponent,
     StatsComponent,
     DepartureComponent,
     AirlineComponent,
-    AirportComponent
+    AirportComponent,
+    PlaneComponent
   ],
   imports: [
     BrowserModule,
@@ -74,4 +76,5 @@ import {AirportComponent} from './airport/airport.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
