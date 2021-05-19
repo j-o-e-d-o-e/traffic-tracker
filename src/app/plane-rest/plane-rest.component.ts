@@ -24,6 +24,7 @@ export class PlaneRestComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    // TODO: API change integrate when done change URL to /planes/{icao}/flights
     this.service.fetch(environment.urlBase + '/flights/icao24/' + this.route.snapshot.params.icao).subscribe(
       (planes: Flights) => {
         this.setData(planes);
