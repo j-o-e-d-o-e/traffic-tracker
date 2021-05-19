@@ -31,6 +31,7 @@ import {AirportComponent} from './airport/airport.component';
 import {PlaneComponent} from './plane/plane.component';
 import {FlightsComponent} from './flights/flights.component';
 import {AirlineRestComponent} from './airline-rest/airline-rest.component';
+import {AirportRestComponent} from './airport-rest/airport-rest.component';
 
 @NgModule({
   declarations: [
@@ -41,18 +42,19 @@ import {AirlineRestComponent} from './airline-rest/airline-rest.component';
     WeekComponent,
     MonthComponent,
     YearComponent,
-    FlightsComponent,
-    FlightsRestComponent,
     HomeComponent,
-    PlaneRestComponent,
     ForecastComponent,
     ErrorComponent,
     StatsComponent,
     DepartureComponent,
+    FlightsComponent,
+    FlightsRestComponent,
     AirlineComponent,
     AirlineRestComponent,
     AirportComponent,
-    PlaneComponent
+    AirportRestComponent,
+    PlaneComponent,
+    PlaneRestComponent
   ],
   imports: [
     BrowserModule,
