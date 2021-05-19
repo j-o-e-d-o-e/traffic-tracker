@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AirlineComponent} from './airline/airline.component';
 import {HomeComponent} from './home/home.component';
 import {PlaneRestComponent} from './plane-rest/plane-rest.component';
-import {FlightsComponent} from './flights/flights.component';
+import {FlightsRestComponent} from './flights-rest/flights-rest.component';
 import {DayComponent} from './day/day.component';
 import {WeekComponent} from './week/week.component';
 import {MonthComponent} from './month/month.component';
@@ -20,7 +20,8 @@ const routes: Routes = [
   {path: 'plane-rest/:icao', component: PlaneRestComponent},
   {path: 'airline/:icao', component: AirlineComponent},
   {path: 'airport/:icao', component: AirportComponent},
-  {path: 'flights/:date', component: FlightsComponent},
+  // {path: 'flights/:date', component: FlightsComponent},
+  {path: 'flights-rest/:date', component: FlightsRestComponent},
   {path: 'day', component: DayComponent},
   {path: 'day/:date', component: DayComponent},
   {path: 'week/:date', component: WeekComponent},

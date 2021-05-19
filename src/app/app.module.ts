@@ -16,7 +16,7 @@ import {DayComponent} from './day/day.component';
 import {WeekComponent} from './week/week.component';
 import {MonthComponent} from './month/month.component';
 import {YearComponent} from './year/year.component';
-import {FlightsComponent} from './flights/flights.component';
+import {FlightsRestComponent} from './flights-rest/flights-rest.component';
 import {HomeComponent} from './home/home.component';
 import {PlaneRestComponent} from './plane-rest/plane-rest.component';
 import {ForecastComponent} from './forecast/forecast.component';
@@ -39,7 +39,7 @@ import {PlaneComponent} from './plane/plane.component';
     WeekComponent,
     MonthComponent,
     YearComponent,
-    FlightsComponent,
+    FlightsRestComponent,
     HomeComponent,
     PlaneRestComponent,
     ForecastComponent,

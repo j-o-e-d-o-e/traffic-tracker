@@ -5,11 +5,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 
 @Component({
-  selector: 'app-flights',
-  templateUrl: './flights.component.html',
-  styleUrls: ['./flights.component.css', '../app.component.css']
+  selector: 'app-flights-rest',
+  templateUrl: './flights-rest.component.html',
+  styleUrls: ['./flights-rest.component.css', '../app.component.css']
 })
-export class FlightsComponent implements OnInit {
+export class FlightsRestComponent implements OnInit {
   flights: Flights;
   loading: boolean;
   departureInfo: boolean;
