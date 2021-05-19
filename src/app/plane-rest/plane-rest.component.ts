@@ -24,10 +24,9 @@ export class PlaneRestComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    // TODO: API change integrate when done change URL to /planes/{icao}/flights
-    this.service.fetch(environment.urlBase + '/flights/icao24/' + this.route.snapshot.params.icao).subscribe(
-      (planes: Flights) => {
-        this.setData(planes);
+    this.service.fetch(environment.urlBase + '/planes/' + this.route.snapshot.params.icao + '/flights').subscribe(
+      (data: Flights) => {
+        this.setData(data);
         this.loading = false;
       },
       (message) => {
@@ -36,29 +35,29 @@ export class PlaneRestComponent implements OnInit {
       });
   }
 
-  private setData(planes: Flights) {
-    this.flights = planes;
+  private setData(data: Flights) {
+    this.flights = data;
     this.airlinesInfo = this.airlinesStartDate <= new Date(this.flights._embedded.flightDtoes[0].date).setHours(0, 0, 0, 0);
   }
 
   onPrev() {
     this.service.fetch(this.flights._links.prev.href).subscribe(
-      (planes: Flights) => {
-        this.setData(planes);
+      (data: Flights) => {
+        this.setData(data);
       });
   }
 
   onNext() {
     this.service.fetch(this.flights._links.next.href).subscribe(
-      (planes: Flights) => {
-        this.setData(planes);
+      (data: Flights) => {
+        this.setData(data);
       });
   }
 
   onLast() {
     this.service.fetch(this.flights._links.last.href).subscribe(
-      (planes: Flights) => {
-        this.setData(planes);
+      (data: Flights) => {
+        this.setData(data);
       });
   }
 
