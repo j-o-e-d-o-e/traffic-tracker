@@ -14,12 +14,14 @@ import {YearComponent} from './year/year.component';
 import {AirportComponent} from './airport/airport.component';
 import {PlaneComponent} from './plane/plane.component';
 import {FlightsComponent} from './flights/flights.component';
+import {AirlineRestComponent} from './airline-rest/airline-rest.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'plane/:icao', component: PlaneComponent},
   {path: 'plane-rest/:icao', component: PlaneRestComponent},
   {path: 'airline/:icao', component: AirlineComponent},
+  {path: 'airline-rest/:icao', component: AirlineRestComponent},
   {path: 'airport/:icao', component: AirportComponent},
   {path: 'flights/:date', component: FlightsComponent},
   {path: 'flights-rest/:date', component: FlightsRestComponent},

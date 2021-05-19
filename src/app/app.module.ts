@@ -30,6 +30,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AirportComponent} from './airport/airport.component';
 import {PlaneComponent} from './plane/plane.component';
 import {FlightsComponent} from './flights/flights.component';
+import {AirlineRestComponent} from './airline-rest/airline-rest.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import {FlightsComponent} from './flights/flights.component';
     StatsComponent,
     DepartureComponent,
     AirlineComponent,
+    AirlineRestComponent,
     AirportComponent,
     PlaneComponent
   ],
