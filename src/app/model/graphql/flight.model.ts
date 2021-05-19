@@ -10,4 +10,6 @@ export interface Flight {
   departure: Airport;
   airline: Airline;
   plane: Plane;
+  altitude: number;
+  speed: number;
 }

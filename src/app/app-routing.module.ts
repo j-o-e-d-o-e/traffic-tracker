@@ -13,6 +13,7 @@ import {ErrorComponent} from './error/error.component';
 import {YearComponent} from './year/year.component';
 import {AirportComponent} from './airport/airport.component';
 import {PlaneComponent} from './plane/plane.component';
+import {FlightsComponent} from './flights/flights.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -20,7 +21,7 @@ const routes: Routes = [
   {path: 'plane-rest/:icao', component: PlaneRestComponent},
   {path: 'airline/:icao', component: AirlineComponent},
   {path: 'airport/:icao', component: AirportComponent},
-  // {path: 'flights/:date', component: FlightsComponent},
+  {path: 'flights/:date', component: FlightsComponent},
   {path: 'flights-rest/:date', component: FlightsRestComponent},
   {path: 'day', component: DayComponent},
   {path: 'day/:date', component: DayComponent},

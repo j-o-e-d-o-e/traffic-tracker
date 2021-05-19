@@ -29,6 +29,7 @@ import {TooltipModule} from 'ng2-tooltip-directive';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AirportComponent} from './airport/airport.component';
 import {PlaneComponent} from './plane/plane.component';
+import {FlightsComponent} from './flights/flights.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {PlaneComponent} from './plane/plane.component';
     WeekComponent,
     MonthComponent,
     YearComponent,
+    FlightsComponent,
     FlightsRestComponent,
     HomeComponent,
     PlaneRestComponent,
