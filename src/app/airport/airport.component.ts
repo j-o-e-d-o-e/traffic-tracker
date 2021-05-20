@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Apollo} from 'apollo-angular';
-import {DataService} from '../service/data.service';
 import {GET_FLIGHTS_FROM_AIRPORT, GET_FLIGHTS_FROM_AIRPORT_INITIAL} from './query';
 import {Airport} from '../model/graphql/airport.model';
 import {Page} from '../model/graphql/page.model';
@@ -19,8 +18,8 @@ export class AirportComponent implements OnInit {
   error = false;
   errorMessage: string;
 
-  constructor(private client: Apollo, private service: DataService,
-              private route: ActivatedRoute, private location: Location, private router: Router) {
+  constructor(private client: Apollo, private route: ActivatedRoute,
+              private location: Location, private router: Router) {
   }
 
   ngOnInit() {
@@ -95,9 +94,5 @@ export class AirportComponent implements OnInit {
 
   onPlane(icao: string) {
     this.router.navigate(['/plane', icao]).catch();
-  }
-
-  onInput($event: number) {
-    console.log($event);
   }
 }

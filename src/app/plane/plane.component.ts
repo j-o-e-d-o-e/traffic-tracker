@@ -25,6 +25,7 @@ export class PlaneComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.icao = this.route.snapshot.params.icao;
+    console.log(this.icao);
     this.sendQuery(this.icao, 0);
   }
 
@@ -46,7 +47,7 @@ export class PlaneComponent implements OnInit {
 
   private setData(page: Page) {
     this.page = page;
-    // console.log(this.page);
+    console.log(this.page);
   }
 
   onPrev() {
@@ -80,9 +81,5 @@ export class PlaneComponent implements OnInit {
   checkDate(date: string) {
     const flightDate = new Date(date).setHours(0, 0, 0, 0);
     return flightDate < new Date().setHours(0, 0, 0, 0);
-  }
-
-  onInput($event: number) {
-    console.log($event);
   }
 }
