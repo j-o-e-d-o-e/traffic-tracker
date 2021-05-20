@@ -47,7 +47,7 @@ export class PlaneComponent implements OnInit {
 
   private setData(page: Page) {
     this.page = page;
-    console.log(this.page);
+    // console.log(this.page);
   }
 
   onPrev() {
