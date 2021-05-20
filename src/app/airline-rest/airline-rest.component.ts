@@ -70,15 +70,19 @@ export class AirlineRestComponent implements OnInit {
   }
 
   onAirport(icao: string) {
-    this.router.navigate(['/airport', icao]).catch();
+    this.router.navigate(['/airport-rest', icao]).catch();
   }
 
   onPlane(icao: string) {
-    this.router.navigate(['/plane', icao]).catch();
+    this.router.navigate(['/plane-rest', icao]).catch();
   }
 
   checkDate(date: string) {
     const flightDate = new Date(date).setHours(0, 0, 0, 0);
     return flightDate >= this.departureStartDate && flightDate < new Date().setHours(0, 0, 0, 0);
+  }
+
+  onInput($event: number) {
+    console.log($event);
   }
 }

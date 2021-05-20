@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Apollo} from 'apollo-angular';
 import {DataService} from '../service/data.service';
-import {GET_FLIGHTS_BY_AIRLINE_INITIAL, GET_FLIGHTS_BY_AIRLINE} from './query';
+import {GET_FLIGHTS_BY_AIRLINE, GET_FLIGHTS_BY_AIRLINE_INITIAL} from './query';
 import {Page} from '../model/graphql/page.model';
 import {Airline} from '../model/graphql/airline.model';
 
@@ -98,5 +98,9 @@ export class AirlineComponent implements OnInit {
   checkDate(date: string) {
     const flightDate = new Date(date).setHours(0, 0, 0, 0);
     return flightDate < new Date().setHours(0, 0, 0, 0);
+  }
+
+  onInput($event: number) {
+    console.log($event);
   }
 }

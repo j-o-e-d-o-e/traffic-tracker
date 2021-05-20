@@ -81,4 +81,8 @@ export class PlaneComponent implements OnInit {
     const flightDate = new Date(date).setHours(0, 0, 0, 0);
     return flightDate < new Date().setHours(0, 0, 0, 0);
   }
+
+  onInput($event: number) {
+    console.log($event);
+  }
 }

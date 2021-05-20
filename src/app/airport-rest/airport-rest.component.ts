@@ -74,6 +74,10 @@ export class AirportRestComponent implements OnInit {
   }
 
   onPlane(icao: string) {
-    this.router.navigate(['/plane', icao]).catch();
+    this.router.navigate(['/plane-rest', icao]).catch();
+  }
+
+  onInput($event: number) {
+    console.log($event);
   }
 }

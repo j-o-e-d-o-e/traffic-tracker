@@ -47,11 +47,13 @@ export class AirportComponent implements OnInit {
   }
 
   private sendQuery(icao: string, page: number) {
+    const start = Date.now();
     this.client
       .query({
         query: GET_FLIGHTS_FROM_AIRPORT,
         variables: {icao, page}
       }).subscribe(({data, loading}) => {
+        console.log('Response: ' + (Date.now() - start) + ' ms');
         this.loading = loading;
         // @ts-ignore
         this.setData(data.flightsFromAirport);
@@ -93,5 +95,9 @@ export class AirportComponent implements OnInit {
 
   onPlane(icao: string) {
     this.router.navigate(['/plane', icao]).catch();
+  }
+
+  onInput($event: number) {
+    console.log($event);
   }
 }

@@ -32,6 +32,7 @@ import {PlaneComponent} from './plane/plane.component';
 import {FlightsComponent} from './flights/flights.component';
 import {AirlineRestComponent} from './airline-rest/airline-rest.component';
 import {AirportRestComponent} from './airport-rest/airport-rest.component';
+import {PageSizeComponent} from './page-size/page-size.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import {AirportRestComponent} from './airport-rest/airport-rest.component';
     AirportComponent,
     AirportRestComponent,
     PlaneComponent,
-    PlaneRestComponent
+    PlaneRestComponent,
+    PageSizeComponent
   ],
   imports: [
     BrowserModule,
