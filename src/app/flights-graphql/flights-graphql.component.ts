@@ -21,7 +21,6 @@ export class FlightsGraphqlComponent implements OnInit {
   errorMessage: string;
   @ViewChild('form')
   form: NgForm;
-  responseTime: number;
 
   constructor(private client: Apollo, private service: DataService,
               private route: ActivatedRoute, private location: Location, private router: Router) {
@@ -30,17 +29,20 @@ export class FlightsGraphqlComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.date = this.route.snapshot.params.date;
-    this.sendQuery(this.date, 0, this.size);
+    this.sendQuery(0);
   }
 
-  private sendQuery(date: string, page: number, size: number) {
+  private sendQuery(page: number) {
+    const date = this.date;
+    const size = this.size;
     const start = Date.now();
     this.client
       .query({
         query: GET_FLIGHTS_BY_DATE,
         variables: {date, page, size}
       }).subscribe(({data, loading}) => {
-        this.responseTime = Date.now() - start;
+        const responseTime = Date.now() - start;
+        console.log('Response time: ' + responseTime + 'ms');
         this.loading = loading;
         // @ts-ignore
         this.setData(data.flightsByDate);
@@ -57,15 +59,15 @@ export class FlightsGraphqlComponent implements OnInit {
   }
 
   onPrev() {
-    this.sendQuery(this.date, this.page.pageNumber - 1, this.size);
+    this.sendQuery(this.page.pageNumber - 1);
   }
 
   onNext() {
-    this.sendQuery(this.date, this.page.pageNumber + 1, this.size);
+    this.sendQuery(this.page.pageNumber + 1);
   }
 
   onLast() {
-    this.sendQuery(this.date, this.page.totalPages - 1, this.size);
+    this.sendQuery(this.page.totalPages - 1);
   }
 
   onDay() {
@@ -91,6 +93,6 @@ export class FlightsGraphqlComponent implements OnInit {
 
   onFetch() {
     this.size = this.form.value.pageSize;
-    this.sendQuery(this.date, 0, this.size);
+    this.sendQuery(0);
   }
 }

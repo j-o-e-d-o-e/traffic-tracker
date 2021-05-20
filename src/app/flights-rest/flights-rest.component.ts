@@ -20,8 +20,6 @@ export class FlightsRestComponent implements OnInit {
   errorMessage: string;
   @ViewChild('form')
   form: NgForm;
-  responseTime: number;
-  size = 20;
 
   constructor(private service: DataService, private route: ActivatedRoute, private router: Router) {
   }
@@ -29,10 +27,15 @@ export class FlightsRestComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.departureInfo = false;
+    this.fetch(environment.urlBase + '/flights/' + this.route.snapshot.params.date);
+  }
+
+  private fetch(url: string) {
     const start = Date.now();
-    this.service.fetch(environment.urlBase + '/flights/' + this.route.snapshot.params.date).subscribe(
+    this.service.fetch(url).subscribe(
       (flights: Flights) => {
-        this.responseTime = Date.now() - start;
+        const responseTime = Date.now() - start;
+        console.log('Response time: ' + responseTime + ' ms');
         this.setData(flights);
         this.loading = false;
       },
@@ -55,24 +58,15 @@ export class FlightsRestComponent implements OnInit {
   }
 
   onPrev() {
-    this.service.fetch(this.flights._links.prev.href).subscribe(
-      (flights: Flights) => {
-        this.setData(flights);
-      });
+    this.fetch(this.flights._links.prev.href);
   }
 
   onNext() {
-    this.service.fetch(this.flights._links.next.href).subscribe(
-      (flights: Flights) => {
-        this.setData(flights);
-      });
+    this.fetch(this.flights._links.next.href);
   }
 
   onLast() {
-    this.service.fetch(this.flights._links.last.href).subscribe(
-      (flights: Flights) => {
-        this.setData(flights);
-      });
+    this.fetch(this.flights._links.last.href);
   }
 
   onDay() {
@@ -92,9 +86,8 @@ export class FlightsRestComponent implements OnInit {
   }
 
   onFetch() {
-    this.service.fetch(this.flights._links.self.href).subscribe(
-      (flights: Flights) => {
-        this.setData(flights);
-      });
+    const size = this.form.value.pageSize;
+    const url = environment.urlBase + '/flights/' + this.route.snapshot.params.date + '?page=0&size=' + size;
+    this.fetch(url);
   }
 }

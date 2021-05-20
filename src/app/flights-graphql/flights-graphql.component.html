@@ -78,9 +78,8 @@
   <footer class="footer navbar-bottom">
     <form (ngSubmit)="onFetch()" #form="ngForm">
       <label for="pageSize">Page size:</label>
-      <input id="pageSize" type="number" min="1" max="50" name="pageSize" step="1" [ngModel]="4">
+      <input id="pageSize" type="number" min="1" max="50" name="pageSize" step="5" [ngModel]="size">
       <button type="submit" class="btn btn-success">Fetch</button>
-      <small *ngIf="responseTime"><i>{{responseTime}} ms</i></small>
     </form>
   </footer>
 
