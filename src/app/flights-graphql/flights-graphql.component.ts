@@ -92,7 +92,14 @@ export class FlightsGraphqlComponent implements OnInit {
   }
 
   onFetch() {
-    this.size = this.form.value.pageSize;
+    let size = this.form.value.pageSize;
+    if (size < 5) {
+      size = 5;
+    }
+    if (size > 50) {
+      size = 50;
+    }
+    this.size = size;
     this.sendQuery(0);
   }
 }

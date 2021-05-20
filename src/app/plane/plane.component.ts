@@ -25,7 +25,6 @@ export class PlaneComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.icao = this.route.snapshot.params.icao;
-    console.log(this.icao);
     this.sendQuery(this.icao, 0);
   }
 

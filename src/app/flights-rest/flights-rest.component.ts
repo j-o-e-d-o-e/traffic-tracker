@@ -86,7 +86,13 @@ export class FlightsRestComponent implements OnInit {
   }
 
   onFetch() {
-    const size = this.form.value.pageSize;
+    let size = this.form.value.pageSize;
+    if (size < 5) {
+      size = 5;
+    }
+    if (size > 50) {
+      size = 50;
+    }
     const url = environment.urlBase + '/flights/' + this.route.snapshot.params.date + '?page=0&size=' + size;
     this.fetch(url);
   }
