@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // urlBase: 'http://localhost:8080/api',
-  // uriGraphQL: 'https://localhost:8080/graphql',
+  // uriGraphQL: 'http://localhost:8080/graphql',
   urlBase: 'https://traffic-tracker.herokuapp.com/api',
   uriGraphQL: 'https://traffic-tracker.herokuapp.com/graphql',
   startYear: 2019,
