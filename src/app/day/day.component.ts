@@ -127,7 +127,7 @@ export class DayComponent implements OnInit {
   }
 
   onFlights() {
-    this.router.navigate(['/flights-rest', this.day.date]).catch();
+    this.router.navigate(['/flights', this.day.date]).catch();
   }
 
   onWeek() {
