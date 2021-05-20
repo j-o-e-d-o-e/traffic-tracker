@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {DataService} from '../service/data.service';
 import {Flights} from '../model/flights.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-flights-rest',
@@ -17,6 +18,10 @@ export class FlightsRestComponent implements OnInit {
   airlinesInfo: boolean;
   error = false;
   errorMessage: string;
+  @ViewChild('form')
+  form: NgForm;
+  responseTime: number;
+  size = 20;
 
   constructor(private service: DataService, private route: ActivatedRoute, private router: Router) {
   }
@@ -24,8 +29,10 @@ export class FlightsRestComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.departureInfo = false;
+    const start = Date.now();
     this.service.fetch(environment.urlBase + '/flights/' + this.route.snapshot.params.date).subscribe(
       (flights: Flights) => {
+        this.responseTime = Date.now() - start;
         this.setData(flights);
         this.loading = false;
       },
@@ -73,18 +80,21 @@ export class FlightsRestComponent implements OnInit {
   }
 
   onPlane(icao: string) {
-    this.router.navigate(['/plane-rest', icao]).catch();
+    this.router.navigate(['/plane', icao]).catch();
   }
 
   onAirline(icao: string) {
-    this.router.navigate(['/airline-rest', icao]).catch();
+    this.router.navigate(['/airline', icao]).catch();
   }
 
   onAirport(icao: string) {
-    this.router.navigate(['/airport-rest', icao]).catch();
+    this.router.navigate(['/airport', icao]).catch();
   }
 
-  onInput($event: number) {
-    console.log($event);
+  onFetch() {
+    this.service.fetch(this.flights._links.self.href).subscribe(
+      (flights: Flights) => {
+        this.setData(flights);
+      });
   }
 }

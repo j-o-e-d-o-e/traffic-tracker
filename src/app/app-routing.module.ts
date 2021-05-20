@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AirlineComponent} from './airline/airline.component';
 import {HomeComponent} from './home/home.component';
-import {PlaneRestComponent} from './plane-rest/plane-rest.component';
 import {FlightsRestComponent} from './flights-rest/flights-rest.component';
 import {DayComponent} from './day/day.component';
 import {WeekComponent} from './week/week.component';
@@ -13,20 +12,15 @@ import {ErrorComponent} from './error/error.component';
 import {YearComponent} from './year/year.component';
 import {AirportComponent} from './airport/airport.component';
 import {PlaneComponent} from './plane/plane.component';
-import {AirlineRestComponent} from './airline-rest/airline-rest.component';
-import {AirportRestComponent} from './airport-rest/airport-rest.component';
+import {FlightsGraphqlComponent} from './flights-graphql/flights-graphql.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'plane/:icao', component: PlaneComponent},
-  {path: 'plane-rest/:icao', component: PlaneRestComponent},
   {path: 'airline/:icao', component: AirlineComponent},
-  {path: 'airline-rest/:icao', component: AirlineRestComponent},
   {path: 'airport/:icao', component: AirportComponent},
-  {path: 'airport-rest/:icao', component: AirportRestComponent},
-  // {path: 'flights/:date', component: FlightsComponent},
-  // {path: 'flights-rest/:date', component: FlightsRestComponent},
-  {path: 'flights/:date', component: FlightsRestComponent},
+  {path: 'flights/:date', component: FlightsGraphqlComponent},
+  {path: 'flights-rest/:date', component: FlightsRestComponent},
   {path: 'day', component: DayComponent},
   {path: 'day/:date', component: DayComponent},
   {path: 'week/:date', component: WeekComponent},

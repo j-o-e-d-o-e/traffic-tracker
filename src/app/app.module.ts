@@ -18,7 +18,6 @@ import {MonthComponent} from './month/month.component';
 import {YearComponent} from './year/year.component';
 import {FlightsRestComponent} from './flights-rest/flights-rest.component';
 import {HomeComponent} from './home/home.component';
-import {PlaneRestComponent} from './plane-rest/plane-rest.component';
 import {ForecastComponent} from './forecast/forecast.component';
 import {ErrorComponent} from './error/error.component';
 import {StatsComponent} from './stats/stats.component';
@@ -29,10 +28,7 @@ import {TooltipModule} from 'ng2-tooltip-directive';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AirportComponent} from './airport/airport.component';
 import {PlaneComponent} from './plane/plane.component';
-import {FlightsComponent} from './flights/flights.component';
-import {AirlineRestComponent} from './airline-rest/airline-rest.component';
-import {AirportRestComponent} from './airport-rest/airport-rest.component';
-import {PageSizeComponent} from './page-size/page-size.component';
+import {FlightsGraphqlComponent} from './flights-graphql/flights-graphql.component';
 
 @NgModule({
   declarations: [
@@ -48,15 +44,11 @@ import {PageSizeComponent} from './page-size/page-size.component';
     ErrorComponent,
     StatsComponent,
     DepartureComponent,
-    FlightsComponent,
+    FlightsGraphqlComponent,
     FlightsRestComponent,
     AirlineComponent,
-    AirlineRestComponent,
     AirportComponent,
-    AirportRestComponent,
-    PlaneComponent,
-    PlaneRestComponent,
-    PageSizeComponent
+    PlaneComponent
   ],
   imports: [
     BrowserModule,

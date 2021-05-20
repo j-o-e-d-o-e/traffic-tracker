@@ -1,22 +1,27 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Apollo} from 'apollo-angular';
 import {DataService} from '../service/data.service';
-import {GET_FLIGHTS_BY_DATE} from './query';
 import {Page} from '../model/graphql/page.model';
+import {GET_FLIGHTS_BY_DATE} from './query';
+import {NgForm} from '@angular/forms';
 
 @Component({
-  selector: 'app-airline',
-  templateUrl: './flights.component.html',
-  styleUrls: ['./flights.component.css', '../app.component.css']
+  selector: 'app-flights-graphql',
+  templateUrl: './flights-graphql.component.html',
+  styleUrls: ['./flights-graphql.component.css', '../app.component.css']
 })
-export class FlightsComponent implements OnInit {
+export class FlightsGraphqlComponent implements OnInit {
   date: string;
   page: Page;
+  size = 20;
   loading: boolean;
   error = false;
   errorMessage: string;
+  @ViewChild('form')
+  form: NgForm;
+  responseTime: number;
 
   constructor(private client: Apollo, private service: DataService,
               private route: ActivatedRoute, private location: Location, private router: Router) {
@@ -25,18 +30,20 @@ export class FlightsComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.date = this.route.snapshot.params.date;
-    this.sendQuery(this.date, 0);
+    this.sendQuery(this.date, 0, this.size);
   }
 
-  private sendQuery(date: string, page: number) {
+  private sendQuery(date: string, page: number, size: number) {
+    const start = Date.now();
     this.client
       .query({
         query: GET_FLIGHTS_BY_DATE,
-        variables: {date, page}
+        variables: {date, page, size}
       }).subscribe(({data, loading}) => {
+        this.responseTime = Date.now() - start;
         this.loading = loading;
         // @ts-ignore
-        this.setData(data.flightsByAirline);
+        this.setData(data.flightsByDate);
       },
       (error: any) => {
         this.error = true;
@@ -46,19 +53,19 @@ export class FlightsComponent implements OnInit {
 
   private setData(page: Page) {
     this.page = page;
-    console.log(this.page);
+    // console.log(this.page);
   }
 
   onPrev() {
-    this.sendQuery(this.date, this.page.pageNumber - 1);
+    this.sendQuery(this.date, this.page.pageNumber - 1, this.size);
   }
 
   onNext() {
-    this.sendQuery(this.date, this.page.pageNumber + 1);
+    this.sendQuery(this.date, this.page.pageNumber + 1, this.size);
   }
 
   onLast() {
-    this.sendQuery(this.date, this.page.totalPages - 1);
+    this.sendQuery(this.date, this.page.totalPages - 1, this.size);
   }
 
   onDay() {
@@ -82,7 +89,8 @@ export class FlightsComponent implements OnInit {
     return flightDate < new Date().setHours(0, 0, 0, 0);
   }
 
-  onInput($event: number) {
-    console.log($event);
+  onFetch() {
+    this.size = this.form.value.pageSize;
+    this.sendQuery(this.date, 0, this.size);
   }
 }

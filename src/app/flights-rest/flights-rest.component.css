@@ -8,3 +8,16 @@
   color: purple;
   text-decoration: underline;
 }
+
+label {
+  margin-right: 10px;
+}
+
+input {
+  margin-right: 10px;
+  max-width: 80px;
+}
+
+small{
+  margin-left: 10px;
+}
