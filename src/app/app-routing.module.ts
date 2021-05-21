@@ -13,10 +13,12 @@ import {YearComponent} from './year/year.component';
 import {AirportComponent} from './airport/airport.component';
 import {PlaneComponent} from './plane/plane.component';
 import {FlightsGraphqlComponent} from './flights-graphql/flights-graphql.component';
+import {PlaneRestComponent} from './plane-rest/plane-rest.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'plane/:icao', component: PlaneComponent},
+  {path: 'plane-rest/:icao', component: PlaneRestComponent},
   {path: 'airline/:icao', component: AirlineComponent},
   {path: 'airport/:icao', component: AirportComponent},
   {path: 'flights/:date', component: FlightsGraphqlComponent},

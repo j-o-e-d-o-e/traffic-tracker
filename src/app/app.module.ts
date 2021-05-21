@@ -29,6 +29,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AirportComponent} from './airport/airport.component';
 import {PlaneComponent} from './plane/plane.component';
 import {FlightsGraphqlComponent} from './flights-graphql/flights-graphql.component';
+import {PlaneRestComponent} from './plane-rest/plane-rest.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {FlightsGraphqlComponent} from './flights-graphql/flights-graphql.compone
     FlightsRestComponent,
     AirlineComponent,
     AirportComponent,
-    PlaneComponent
+    PlaneComponent,
+    PlaneRestComponent
   ],
   imports: [
     BrowserModule,
