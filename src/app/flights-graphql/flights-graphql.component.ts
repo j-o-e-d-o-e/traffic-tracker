@@ -17,6 +17,7 @@ export class FlightsGraphqlComponent implements OnInit {
   page: Page;
   size = 20;
   loading: boolean;
+  departureInfo: boolean;
   error = false;
   errorMessage: string;
   @ViewChild('form')
@@ -28,6 +29,7 @@ export class FlightsGraphqlComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.departureInfo = false;
     this.date = this.route.snapshot.params.date;
     this.sendQuery(0);
   }
@@ -56,6 +58,12 @@ export class FlightsGraphqlComponent implements OnInit {
   private setData(page: Page) {
     this.page = page;
     // console.log(this.page);
+    for (const flight of this.page.content) {
+      if (flight.departure !== undefined) {
+        this.departureInfo = true;
+        break;
+      }
+    }
   }
 
   onPrev() {
@@ -84,11 +92,6 @@ export class FlightsGraphqlComponent implements OnInit {
 
   onPlane(icao: string) {
     this.router.navigate(['/plane', icao]).catch();
-  }
-
-  checkDate(date: string) {
-    const flightDate = new Date(date).setHours(0, 0, 0, 0);
-    return flightDate < new Date().setHours(0, 0, 0, 0);
   }
 
   onFetch() {

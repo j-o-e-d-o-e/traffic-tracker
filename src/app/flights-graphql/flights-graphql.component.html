@@ -39,7 +39,7 @@
             <th>Time</th>
             <th>Plane</th>
             <th>Airline</th>
-            <th>Departure</th>
+            <th *ngIf="departureInfo">Departure</th>
             <th>Altitude (m)</th>
             <th>Speed (km/h)</th>
           </tr>
@@ -53,7 +53,7 @@
                 {{flight.airline.name !== undefined ? flight.airline.name : flight.airline.icao}}
               </div>
             </td>
-            <ng-container *ngIf="checkDate(flight.date); else today">
+            <ng-container *ngIf="departureInfo">
               <td *ngIf="flight.departure !== undefined; else no_name">
                 <div class="table-link" (click)="onAirport(flight.departure.icao)">
                   {{flight.departure.name ? flight.departure.name : flight.departure.icao}}
@@ -63,9 +63,6 @@
                 <td>{{"Unknown"}}</td>
               </ng-template>
             </ng-container>
-            <ng-template #today>
-              <td></td>
-            </ng-template>
             <td>{{flight.altitude}}</td>
             <td>{{flight.speed}}</td>
           </tr>
