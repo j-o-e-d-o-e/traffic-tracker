@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Apollo} from 'apollo-angular';
-import {GET_FLIGHTS_BY_AIRLINE, GET_FLIGHTS_BY_AIRLINE_INITIAL} from './query';
+import {FLIGHTS_BY_AIRLINE, FLIGHTS_BY_AIRLINE_INITIAL} from './query';
 import {Page} from '../model/graphql/page.model';
 import {Airline} from '../model/graphql/airline.model';
 
@@ -30,14 +30,14 @@ export class AirlineComponent implements OnInit {
   private sendFirstQuery(icao: string, page: number) {
     this.client
       .query({
-        query: GET_FLIGHTS_BY_AIRLINE_INITIAL,
+        query: FLIGHTS_BY_AIRLINE_INITIAL,
         variables: {icao, page}
       }).subscribe(({data, loading}) => {
         this.loading = loading;
         // @ts-ignore
         this.airline = data.airline;
         // @ts-ignore
-        this.setData(data.flightsByAirline);
+        this.setData(data.airline.flightsPage);
       },
       (error: any) => {
         this.error = true;
@@ -48,12 +48,12 @@ export class AirlineComponent implements OnInit {
   private sendQuery(icao: string, page: number) {
     this.client
       .query({
-        query: GET_FLIGHTS_BY_AIRLINE,
+        query: FLIGHTS_BY_AIRLINE,
         variables: {icao, page}
       }).subscribe(({data, loading}) => {
         this.loading = loading;
         // @ts-ignore
-        this.setData(data.flightsByAirline);
+        this.setData(data.airline.flightsPage);
       },
       (error: any) => {
         this.error = true;

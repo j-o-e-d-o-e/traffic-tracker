@@ -4,7 +4,7 @@ import {Location} from '@angular/common';
 import {Apollo} from 'apollo-angular';
 import {DataService} from '../service/data.service';
 import {Page} from '../model/graphql/page.model';
-import {GET_FLIGHTS_BY_DATE} from './query';
+import {FLIGHTS_BY_DATE} from './query';
 import {NgForm} from '@angular/forms';
 
 @Component({
@@ -38,14 +38,14 @@ export class FlightsGraphqlComponent implements OnInit {
     const start = Date.now();
     this.client
       .query({
-        query: GET_FLIGHTS_BY_DATE,
+        query: FLIGHTS_BY_DATE,
         variables: {date, page, size}
       }).subscribe(({data, loading}) => {
         const responseTime = Date.now() - start;
         console.log('Response time: ' + responseTime + 'ms');
         this.loading = loading;
         // @ts-ignore
-        this.setData(data.flightsByDate);
+        this.setData(data.day.flightsPage);
       },
       (error: any) => {
         this.error = true;

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Apollo} from 'apollo-angular';
-import {GET_FLIGHTS_FROM_AIRPORT, GET_FLIGHTS_FROM_AIRPORT_INITIAL} from './query';
+import {FLIGHTS_FROM_AIRPORT, FLIGHTS_FROM_AIRPORT_INITIAL} from './query';
 import {Airport} from '../model/graphql/airport.model';
 import {Page} from '../model/graphql/page.model';
 
@@ -30,14 +30,14 @@ export class AirportComponent implements OnInit {
   private sendFirstQuery(icao: string, page: number) {
     this.client
       .query({
-        query: GET_FLIGHTS_FROM_AIRPORT_INITIAL,
+        query: FLIGHTS_FROM_AIRPORT_INITIAL,
         variables: {icao, page}
       }).subscribe(({data, loading}) => {
         this.loading = loading;
         // @ts-ignore
         this.airport = data.departure;
         // @ts-ignore
-        this.setData(data.flightsFromAirport);
+        this.setData(data.departure.flightsPage);
       },
       (error: any) => {
         this.error = true;
@@ -49,13 +49,13 @@ export class AirportComponent implements OnInit {
     const start = Date.now();
     this.client
       .query({
-        query: GET_FLIGHTS_FROM_AIRPORT,
+        query: FLIGHTS_FROM_AIRPORT,
         variables: {icao, page}
       }).subscribe(({data, loading}) => {
         console.log('Response: ' + (Date.now() - start) + ' ms');
         this.loading = loading;
         // @ts-ignore
-        this.setData(data.flightsFromAirport);
+        this.setData(data.departure.flightsPage);
       },
       (error: any) => {
         this.error = true;

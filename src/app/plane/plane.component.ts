@@ -36,7 +36,7 @@ export class PlaneComponent implements OnInit {
       }).subscribe(({data, loading}) => {
         this.loading = loading;
         // @ts-ignore
-        this.setData(data.flightsByPlane);
+        this.setData(data.plane.flightsPage);
       },
       (error: any) => {
         this.error = true;
