@@ -30,10 +30,23 @@ export class StatsComponent implements OnInit {
   private setData(stats: Stats) {
     this.stats = stats;
     // console.log(this.stats);
+    console.log(this.stats.plane_with_most_flights_within_one_day.day.date);
   }
 
   onDay(s: string) {
-    const date: string = s[0] + '-' + s[1] + '-' + s[2];
+    let day: string;
+    let month: string;
+    if (s[2].toString().length === 1) {
+      day = '0' + s[2];
+    } else {
+      day = s[2];
+    }
+    if (s[1].toString().length === 1) {
+      month = '0' + s[1];
+    } else {
+      month = s[1];
+    }
+    const date: string = s[0] + '-' + month + '-' + day;
     this.router.navigate(['/day', date]).catch();
   }
 
