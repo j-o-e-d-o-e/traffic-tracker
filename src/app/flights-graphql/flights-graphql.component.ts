@@ -47,7 +47,7 @@ export class FlightsGraphqlComponent implements OnInit {
         console.log('Response time: ' + responseTime + 'ms');
         this.loading = loading;
         // @ts-ignore
-        this.setData(data.day.flightsPage);
+        this.setData(data.day.flights);
       },
       (error: any) => {
         this.error = true;

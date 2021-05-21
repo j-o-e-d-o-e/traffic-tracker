@@ -5,7 +5,7 @@ export const GET_FLIGHTS_BY_PLANE = gql`
     plane(icao: $icao) {
       id
       icao
-      flightsPage(req: {page: $page, size: 20}) {
+      flights(req: {page: $page, size: 20}) {
         totalPages
         totalElements
         pageNumber

@@ -3,7 +3,8 @@ import {gql} from 'apollo-angular';
 export const FLIGHTS_BY_DATE = gql`
   query flightsByDate($date: Date!, $page: Int!, $size: Int!) {
     day(date: $date) {
-      flightsPage(req: {page: $page, size: $size}) {
+      id
+      flights(req: {page: $page, size: $size}) {
         totalPages
         totalElements
         pageNumber

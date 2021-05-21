@@ -37,7 +37,7 @@ export class AirportComponent implements OnInit {
         // @ts-ignore
         this.airport = data.departure;
         // @ts-ignore
-        this.setData(data.departure.flightsPage);
+        this.setData(data.departure.flights);
       },
       (error: any) => {
         this.error = true;
@@ -55,7 +55,7 @@ export class AirportComponent implements OnInit {
         console.log('Response: ' + (Date.now() - start) + ' ms');
         this.loading = loading;
         // @ts-ignore
-        this.setData(data.departure.flightsPage);
+        this.setData(data.departure.flights);
       },
       (error: any) => {
         this.error = true;

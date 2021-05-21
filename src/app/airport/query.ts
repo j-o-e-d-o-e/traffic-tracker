@@ -4,7 +4,7 @@ export const FLIGHTS_FROM_AIRPORT_INITIAL = gql`
   query flightsFromAirport($icao: String!, $page: Int!) {
     departure(icao: $icao) {
       id
-      flightsPage(req: {page: $page, size: 20}) {
+      flights(req: {page: $page, size: 20}) {
         totalPages
         totalElements
         pageNumber

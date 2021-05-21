@@ -6,7 +6,7 @@ export const FLIGHTS_BY_AIRLINE_INITIAL = gql`
       id
       icao
       name
-      flightsPage(req: {page: $page, size: 20}) {
+      flights(req: {page: $page, size: 20}) {
         totalPages
         totalElements
         pageNumber

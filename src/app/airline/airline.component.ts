@@ -37,7 +37,7 @@ export class AirlineComponent implements OnInit {
         // @ts-ignore
         this.airline = data.airline;
         // @ts-ignore
-        this.setData(data.airline.flightsPage);
+        this.setData(data.airline.flights);
       },
       (error: any) => {
         this.error = true;
@@ -53,7 +53,7 @@ export class AirlineComponent implements OnInit {
       }).subscribe(({data, loading}) => {
         this.loading = loading;
         // @ts-ignore
-        this.setData(data.airline.flightsPage);
+        this.setData(data.airline.flights);
       },
       (error: any) => {
         this.error = true;
