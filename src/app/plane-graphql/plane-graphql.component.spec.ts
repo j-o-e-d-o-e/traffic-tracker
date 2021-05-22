@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {PlaneComponent} from './plane.component';
+import {PlaneGraphqlComponent} from './plane-graphql.component';
 
 describe('AirlineComponent', () => {
-  let component: PlaneComponent;
-  let fixture: ComponentFixture<PlaneComponent>;
+  let component: PlaneGraphqlComponent;
+  let fixture: ComponentFixture<PlaneGraphqlComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PlaneComponent]
+      declarations: [PlaneGraphqlComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlaneComponent);
+    fixture = TestBed.createComponent(PlaneGraphqlComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

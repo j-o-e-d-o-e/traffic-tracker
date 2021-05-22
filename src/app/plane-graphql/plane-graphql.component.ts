@@ -1,22 +1,27 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Apollo} from 'apollo-angular';
 import {DataService} from '../service/data.service';
 import {GET_FLIGHTS_BY_PLANE} from './query';
 import {Page} from '../model/graphql/page.model';
+import {environment} from '../../environments/environment';
+import {NgForm} from '@angular/forms';
 
 @Component({
-  selector: 'app-plane',
-  templateUrl: './plane.component.html',
-  styleUrls: ['./plane.component.css', '../app.component.css']
+  selector: 'app-plane-graphql',
+  templateUrl: './plane-graphql.component.html',
+  styleUrls: ['./plane-graphql.component.css', '../app.component.css']
 })
-export class PlaneComponent implements OnInit {
+export class PlaneGraphqlComponent implements OnInit {
   icao: string;
   page: Page;
+  size = 20;
   loading: boolean;
   error = false;
   errorMessage: string;
+  @ViewChild('form')
+  form: NgForm;
 
   constructor(private client: Apollo, private service: DataService,
               private route: ActivatedRoute, private location: Location, private router: Router) {
@@ -25,15 +30,20 @@ export class PlaneComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.icao = this.route.snapshot.params.icao;
-    this.sendQuery(this.icao, 0);
+    this.sendQuery(0);
   }
 
-  private sendQuery(icao: string, page: number) {
+  private sendQuery(page: number) {
+    const icao = this.icao;
+    const size = this.size;
+    const start = Date.now();
     this.client
       .query({
         query: GET_FLIGHTS_BY_PLANE,
-        variables: {icao, page}
+        variables: {icao, page, size}
       }).subscribe(({data, loading}) => {
+        const responseTime = Date.now() - start;
+        console.log('Response time: ' + responseTime + 'ms');
         this.loading = loading;
         // @ts-ignore
         this.setData(data.plane.flights);
@@ -50,15 +60,15 @@ export class PlaneComponent implements OnInit {
   }
 
   onPrev() {
-    this.sendQuery(this.icao, this.page.pageNumber - 1);
+    this.sendQuery(this.page.pageNumber - 1);
   }
 
   onNext() {
-    this.sendQuery(this.icao, this.page.pageNumber + 1);
+    this.sendQuery(this.page.pageNumber + 1);
   }
 
   onLast() {
-    this.sendQuery(this.icao, this.page.totalPages - 1);
+    this.sendQuery(this.page.totalPages - 1);
   }
 
   onBack() {
@@ -80,5 +90,17 @@ export class PlaneComponent implements OnInit {
   checkDate(date: string) {
     const flightDate = new Date(date).setHours(0, 0, 0, 0);
     return flightDate < new Date().setHours(0, 0, 0, 0);
+  }
+
+  onFetch() {
+    let size = this.form.value.pageSize;
+    if (size < 5) {
+      size = 5;
+    }
+    if (size > environment.maxPageSize) {
+      size = environment.maxPageSize;
+    }
+    this.size = size;
+    this.sendQuery(0);
   }
 }

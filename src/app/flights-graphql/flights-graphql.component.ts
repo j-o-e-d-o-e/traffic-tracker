@@ -6,6 +6,8 @@ import {DataService} from '../service/data.service';
 import {Page} from '../model/graphql/page.model';
 import {FLIGHTS_BY_DATE} from './query';
 import {NgForm} from '@angular/forms';
+import {environment} from '../../environments/environment';
+
 
 @Component({
   selector: 'app-flights-graphql',
@@ -99,8 +101,8 @@ export class FlightsGraphqlComponent implements OnInit {
     if (size < 5) {
       size = 5;
     }
-    if (size > 50) {
-      size = 50;
+    if (size > environment.maxPageSize) {
+      size = environment.maxPageSize;
     }
     this.size = size;
     this.sendQuery(0);

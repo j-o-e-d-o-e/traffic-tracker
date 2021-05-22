@@ -92,8 +92,8 @@ export class PlaneRestComponent implements OnInit {
     if (size < 5) {
       size = 5;
     }
-    if (size > 50) {
-      size = 50;
+    if (size > environment.maxPageSize) {
+      size = environment.maxPageSize;
     }
     const url = environment.urlBase + '/planes/' + this.route.snapshot.params.icao + '/flights?page=0&size=' + size;
     this.fetch(url);

@@ -92,8 +92,8 @@ export class FlightsRestComponent implements OnInit {
     if (size < 5) {
       size = 5;
     }
-    if (size > 50) {
-      size = 50;
+    if (size > environment.maxPageSize) {
+      size = environment.maxPageSize;
     }
     const url = environment.urlBase + '/flights/' + this.route.snapshot.params.date + '?page=0&size=' + size;
     this.fetch(url);

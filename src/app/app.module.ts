@@ -27,7 +27,7 @@ import {ChartsModule} from 'ng2-charts';
 import {TooltipModule} from 'ng2-tooltip-directive';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AirportComponent} from './airport/airport.component';
-import {PlaneComponent} from './plane/plane.component';
+import {PlaneGraphqlComponent} from './plane-graphql/plane-graphql.component';
 import {FlightsGraphqlComponent} from './flights-graphql/flights-graphql.component';
 import {PlaneRestComponent} from './plane-rest/plane-rest.component';
 
@@ -49,7 +49,7 @@ import {PlaneRestComponent} from './plane-rest/plane-rest.component';
     FlightsRestComponent,
     AirlineComponent,
     AirportComponent,
-    PlaneComponent,
+    PlaneGraphqlComponent,
     PlaneRestComponent
   ],
   imports: [
