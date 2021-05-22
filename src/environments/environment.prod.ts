@@ -7,5 +7,5 @@ export const environment = {
   startDay: 9,
   departuresStartDate: '2020-09-09',
   airlinesStartDate: '2020-09-23',
-  maxPageSize: 25
+  maxPageSize: 20
 };
