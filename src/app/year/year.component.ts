@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./year.component.css', '../app.component.css']
 })
 export class YearComponent implements OnInit {
-  chartType: ChartType = 'bar';
+  chartType: ChartType = 'line';
   chartLabels: Label[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   chartData: ChartDataSets[];
   chartOptions: ChartOptions = {

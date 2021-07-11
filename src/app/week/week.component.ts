@@ -12,7 +12,7 @@ import {environment} from '../../environments/environment';
   styleUrls: ['./week.component.css', '../app.component.css']
 })
 export class WeekComponent implements OnInit {
-  chartType: ChartType = 'bar';
+  chartType: ChartType = 'line';
   chartLabels: Label[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   chartData: ChartDataSets[];
   chartOptions: ChartOptions = {
