@@ -53,6 +53,7 @@ export class DayComponent implements OnInit {
   loading: boolean;
   error = false;
   errorMessage: string;
+  startup: boolean;
 
   constructor(private service: DataService, private route: ActivatedRoute, private router: Router) {
     monkeyPatchChartJsTooltip();
@@ -63,10 +64,12 @@ export class DayComponent implements OnInit {
     this.loading = true;
     const date = this.route.snapshot.params.date;
     if (!date) {
+      this.startup = true;
       this.service.fetch(environment.urlBase + '/days/current').subscribe(
         (day: Day) => {
           this.setData(day);
           this.loading = false;
+          this.startup = false
         },
         (message) => {
           this.error = true;

@@ -30,6 +30,7 @@ import {AirportComponent} from './airport/airport.component';
 import {PlaneGraphqlComponent} from './plane-graphql/plane-graphql.component';
 import {FlightsGraphqlComponent} from './flights-graphql/flights-graphql.component';
 import {PlaneRestComponent} from './plane-rest/plane-rest.component';
+import {SpinnerComponent} from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {PlaneRestComponent} from './plane-rest/plane-rest.component';
     AirlineComponent,
     AirportComponent,
     PlaneGraphqlComponent,
-    PlaneRestComponent
+    PlaneRestComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

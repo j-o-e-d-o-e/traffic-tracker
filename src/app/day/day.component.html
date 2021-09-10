@@ -2,6 +2,14 @@
   <app-error [message]="errorMessage"></app-error>
 </div>
 
+<div *ngIf="loading && startup">
+  <div class="col">
+    <div class="text-center">
+      <app-spinner></app-spinner>
+    </div>
+  </div>
+</div>
+
 <div *ngIf="!loading">
 
   <div class="row btn-toolbar">
