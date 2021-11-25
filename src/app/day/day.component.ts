@@ -17,36 +17,25 @@ export class DayComponent implements OnInit {
   chartData: ChartDataSets[];
   chartOptions: ChartOptions = {
     scales: {
-      yAxes: [{
-        id: 'y-axis-left',
-        position: 'left',
-        type: 'linear',
-        ticks: {
-          beginAtZero: true,
-          callback: (value: number) => {
-            if (value % 1 === 0) {
-              return value;
-            }
-          }
-        },
-        scaleLabel: {
-          display: true,
-          labelString: 'Flights'
-        }
-      },
+      yAxes: [
         {
-          id: 'y-axis-right',
-          position: 'right',
+          id: 'y-axis-left',
+          position: 'left',
           type: 'linear',
           ticks: {
             beginAtZero: true,
-            // max: 400,
+            callback: (value: number) => {
+              if (value % 1 === 0) {
+                return value;
+              }
+            }
           },
           scaleLabel: {
             display: true,
-            labelString: 'Wind degrees'
+            labelString: 'Flights'
           }
-        }]
+        }
+      ]
     }
   };
   day: Day;
@@ -69,7 +58,7 @@ export class DayComponent implements OnInit {
         (day: Day) => {
           this.setData(day);
           this.loading = false;
-          this.startup = false
+          this.startup = false;
         },
         (message) => {
           this.error = true;
@@ -94,7 +83,7 @@ export class DayComponent implements OnInit {
 
   setData(day: Day) {
     this.day = day;
-    // console.log(this.day);
+    console.log(this.day);
     this.chartData = [];
     this.chartData.push({data: this.day.hours_flight, label: 'Absolute', yAxisID: 'y-axis-left'});
     this.chartData.push({
@@ -103,7 +92,24 @@ export class DayComponent implements OnInit {
       yAxisID: 'y-axis-left',
       fill: false
     });
-    this.chartData.push({data: this.day.hours_wind, label: 'Wind direction', yAxisID: 'y-axis-right', fill: false});
+    if (this.day.hours_wind.some(i => i > 0)) {
+      this.chartOptions.scales.yAxes.push(
+        {
+          id: 'y-axis-right',
+          position: 'right',
+          type: 'linear',
+          ticks: {
+            beginAtZero: true,
+            // max: 400,
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Wind degrees'
+          }
+        }
+      );
+      this.chartData.push({data: this.day.hours_wind, label: 'Wind direction', yAxisID: 'y-axis-right', fill: false});
+    }
   }
 
   onPrev() {
