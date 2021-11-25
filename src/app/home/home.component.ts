@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDate, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {DataService} from '../service/data.service';
 import {environment} from '../../environments/environment';
-import {Day} from '../model/day.model';
 
 @Component({
   selector: 'app-home',
@@ -17,13 +16,19 @@ export class HomeComponent implements OnInit {
   startDepartures: Date = new Date(environment.departuresStartDate);
   years = [];
   loading: boolean;
+  enabledDates: NgbDateStruct[] = [];
 
   constructor(private service: DataService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.service.fetch(environment.urlBase + '/days/current').subscribe((day: Day) => {
-      const date = new Date(day.date);
+    this.service.fetch(environment.urlBase + '/days').subscribe((dates: string[]) => {
+      // console.log(dates);
+      for (const d of dates) {
+        const tmp = new Date(d);
+        this.enabledDates.push(new NgbDate(tmp.getFullYear(), tmp.getMonth() + 1, tmp.getDate()));
+      }
+      const date = new Date(dates[dates.length - 1]);
       this.model = new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
       this.maxDate = this.model;
       for (let i = environment.startYear; i <= date.getFullYear(); i++) {
@@ -32,6 +37,10 @@ export class HomeComponent implements OnInit {
       this.loading = false;
     });
     this.loading = true;
+  }
+
+  isEnabled = (date: NgbDateStruct, current: { month: number, year: number }) => {
+    return !this.enabledDates.find(displayed => NgbDate.from(displayed).equals(date));
   }
 
   onDay() {
