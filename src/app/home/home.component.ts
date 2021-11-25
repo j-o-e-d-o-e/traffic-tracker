@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   minDate: NgbDate = new NgbDate(environment.startYear, environment.startMonth, environment.startDay);
   maxDate: NgbDate;
   startDepartures: Date = new Date(environment.departuresStartDate);
+  years = [];
   loading: boolean;
 
   constructor(private service: DataService, private router: Router) {
@@ -25,6 +26,9 @@ export class HomeComponent implements OnInit {
       const date = new Date(day.date);
       this.model = new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
       this.maxDate = this.model;
+      for (let i = environment.startYear; i <= date.getFullYear(); i++) {
+        this.years.push(i);
+      }
       this.loading = false;
     });
     this.loading = true;
