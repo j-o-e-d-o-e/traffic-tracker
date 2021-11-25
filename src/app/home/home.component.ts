@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {NgbDate, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 import {DataService} from '../service/data.service';
 import {environment} from '../../environments/environment';
 import {Day} from '../model/day.model';
@@ -11,31 +11,33 @@ import {Day} from '../model/day.model';
   styleUrls: ['./home.component.css', '../app.component.css']
 })
 export class HomeComponent implements OnInit {
-  model: NgbDateStruct;
-  minDate: NgbDate;
+  model: NgbDate;
+  minDate: NgbDate = new NgbDate(environment.startYear, environment.startMonth, environment.startDay);
   maxDate: NgbDate;
-  startDepartures: Date;
+  startDepartures: Date = new Date(environment.departuresStartDate);
   loading: boolean;
 
   constructor(private service: DataService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.minDate = new NgbDate(environment.startYear, environment.startMonth, environment.startDay);
-    this.startDepartures = new Date(environment.departuresStartDate);
     this.service.fetch(environment.urlBase + '/days/current').subscribe((day: Day) => {
-      const date = new Date(day.now);
-      this.maxDate = new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
-      this.model = this.maxDate;
+      const date = new Date(day.date);
+      this.model = new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
+      this.maxDate = this.model;
       this.loading = false;
     });
     this.loading = true;
   }
 
-  onClick() {
+  onDay() {
     const date = this.model.year + '-'
       + ('0' + this.model.month).slice(-2) + '-'
       + ('0' + this.model.day).slice(-2);
     this.router.navigate(['/day', date]).catch();
+  }
+
+  onYear(year: number) {
+    this.router.navigate(['/year', year]).catch();
   }
 }

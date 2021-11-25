@@ -4,25 +4,40 @@
   <div class="row">
     <div class="col d-flex justify-content-center">
       <p>
-        Tracks planes to <strong>DUS</strong> airport arriving from the east -
-        <strong>0{{minDate.day}}.0{{minDate.month}}.{{minDate.year}}-09.09.2021</strong>.
-        <i>Departure airports: {{startDepartures| date :'dd.MM.yyyy'}}-09.09.2021.</i>
+        Tracks flights to <strong>DUS</strong> airport landing from the east
+        <strong>since 0{{minDate.day}}.0{{minDate.month}}.{{minDate.year}}</strong>.
       </p>
     </div>
   </div>
 
   <div class="row">
     <div class="col d-flex justify-content-center">
+      <!--suppress TypeScriptUnresolvedVariable -->
       <ngb-datepicker [(ngModel)]="model"
                       [minDate]="minDate"
-                      [maxDate]="maxDate"></ngb-datepicker>
+                      [maxDate]="maxDate"
+                      [navigation]="arrows"
+                      [showWeekNumbers]="true">
+      </ngb-datepicker>
     </div>
   </div>
 
   <br>
   <div class="row btn-toolbar">
     <div class="col d-flex justify-content-center">
-      <button type="button" class="btn btn-primary" (click)="onClick()">Choose Day</button>
+      <button type="button" class="btn btn-primary" (click)="onDay()">Choose Day</button>
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col d-flex justify-content-center">
+      <p>
+        Archive:
+        <a class="link" (click)="onYear(2019)">2019</a> |
+        <a class="link" (click)="onYear(2020)">2020</a> |
+        <a class="link" (click)="onYear(2021)">2021</a>
+      </p>
     </div>
   </div>
 
