@@ -43,6 +43,7 @@ export class DayComponent implements OnInit {
   error = false;
   errorMessage: string;
   startup: boolean;
+  windDisplay: boolean;
 
   constructor(private service: DataService, private route: ActivatedRoute, private router: Router) {
     monkeyPatchChartJsTooltip();
@@ -109,7 +110,9 @@ export class DayComponent implements OnInit {
         }
       );
       this.chartData.push({data: this.day.hours_wind, label: 'Wind direction', yAxisID: 'y-axis-right', fill: false});
+      this.windDisplay = true;
     }
+    this.windDisplay = false;
   }
 
   onPrev() {

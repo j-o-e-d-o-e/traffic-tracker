@@ -61,7 +61,7 @@
             <th>Total</th>
             <th>Avg altitude</th>
             <th>Avg speed</th>
-            <th>Wind speed</th>
+            <th *ngIf="windDisplay">Wind speed</th>
           </tr>
           </thead>
           <tbody>
@@ -69,7 +69,7 @@
             <td>{{day.total}}</td>
             <td>{{day.avg_altitude}} m</td>
             <td>{{day.avg_speed}} km/h</td>
-            <td>{{day.wind_speed}} km/h</td>
+            <td *ngIf="windDisplay">{{day.wind_speed}} km/h</td>
           </tr>
           </tbody>
         </table>
