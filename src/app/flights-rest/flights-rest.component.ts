@@ -16,6 +16,7 @@ export class FlightsRestComponent implements OnInit {
   departureInfo: boolean;
   airlinesStartDate: number = new Date(environment.airlinesStartDate).setHours(0, 0, 0, 0);
   airlinesInfo: boolean;
+  photoInfo: boolean;
   error = false;
   errorMessage: string;
   @ViewChild('form')
@@ -27,6 +28,7 @@ export class FlightsRestComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.departureInfo = false;
+    this.photoInfo = false;
     this.fetch(environment.urlBase + '/flights/' + this.route.snapshot.params.date);
   }
 
@@ -50,6 +52,7 @@ export class FlightsRestComponent implements OnInit {
     this.flights = flights;
     // console.log(flights);
     this.airlinesInfo = this.airlinesStartDate <= new Date(this.flights._embedded.flightDtoes[0].date).setHours(0, 0, 0, 0);
+    this.photoInfo = this.flights._embedded.flightDtoes.some(f => f.photo);
     for (const flight of this.flights._embedded.flightDtoes) {
       if (flight.departure_icao !== undefined) {
         this.departureInfo = true;
@@ -97,5 +100,9 @@ export class FlightsRestComponent implements OnInit {
     }
     const url = environment.urlBase + '/flights/' + this.route.snapshot.params.date + '?page=0&size=' + size;
     this.fetch(url);
+  }
+
+  onPhoto(callsign: string, id: number) {
+    this.router.navigate(['/flights/photo', callsign, id]).catch();
   }
 }

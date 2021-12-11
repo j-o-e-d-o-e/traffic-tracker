@@ -15,6 +15,7 @@ export interface Flights {
 }
 
 export interface Flight {
+  id: number;
   altitude: number;
   callsign: string;
   date_time: string;
@@ -25,6 +26,7 @@ export interface Flight {
   departure_name: string;
   airline_icao: string;
   airline_name: string;
+  photo: boolean;
   _links: {
     day: { href: string }
     icao_24: { href: string }

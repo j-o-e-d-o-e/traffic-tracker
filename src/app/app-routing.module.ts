@@ -14,6 +14,7 @@ import {AirportComponent} from './airport/airport.component';
 import {PlaneGraphqlComponent} from './plane-graphql/plane-graphql.component';
 import {FlightsGraphqlComponent} from './flights-graphql/flights-graphql.component';
 import {PlaneRestComponent} from './plane-rest/plane-rest.component';
+import {FlightsPhotoComponent} from './flights-photo/flights-photo.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -21,8 +22,9 @@ const routes: Routes = [
   {path: 'plane-rest/:icao', component: PlaneRestComponent},
   {path: 'airline/:icao', component: AirlineComponent},
   {path: 'airport/:icao', component: AirportComponent},
-  {path: 'flights/:date', component: FlightsGraphqlComponent},
-  {path: 'flights-rest/:date', component: FlightsRestComponent},
+  {path: 'flights-graphql/:date', component: FlightsGraphqlComponent},
+  {path: 'flights/:date', component: FlightsRestComponent},
+  {path: 'flights/photo/:callsign/:id', component: FlightsPhotoComponent},
   {path: 'day', component: DayComponent},
   {path: 'day/:date', component: DayComponent},
   {path: 'week/:date', component: WeekComponent},

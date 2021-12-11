@@ -31,6 +31,7 @@ import {PlaneGraphqlComponent} from './plane-graphql/plane-graphql.component';
 import {FlightsGraphqlComponent} from './flights-graphql/flights-graphql.component';
 import {PlaneRestComponent} from './plane-rest/plane-rest.component';
 import {SpinnerComponent} from './spinner/spinner.component';
+import {FlightsPhotoComponent} from './flights-photo/flights-photo.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {SpinnerComponent} from './spinner/spinner.component';
     AirportComponent,
     PlaneGraphqlComponent,
     PlaneRestComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    FlightsPhotoComponent
   ],
   imports: [
     BrowserModule,

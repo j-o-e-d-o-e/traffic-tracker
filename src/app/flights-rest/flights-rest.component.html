@@ -43,6 +43,7 @@
             <th *ngIf="departureInfo">Departure</th>
             <th>Altitude (m)</th>
             <th>Speed (km/h)</th>
+            <th *ngIf="photoInfo">Photo</th>
           </tr>
           </thead>
           <tbody>
@@ -52,13 +53,19 @@
               <div class="table-link">{{flight.icao_24}}</div>
             </td>
             <ng-container *ngIf="airlinesInfo">
-              <td *ngIf="flight.airline_name !== undefined; else no_airline_name" (click)="onAirline(flight.airline_icao)"><div class="table-link">{{flight.airline_name}}</div></td>
+              <td *ngIf="flight.airline_name !== undefined; else no_airline_name"
+                  (click)="onAirline(flight.airline_icao)">
+                <div class="table-link">{{flight.airline_name}}</div>
+              </td>
               <ng-template #no_airline_name>
-                <td (click)="onAirline(flight.airline_icao)"><div class="table-link">{{flight.airline_icao}}</div></td>
+                <td (click)="onAirline(flight.airline_icao)">
+                  <div class="table-link">{{flight.airline_icao}}</div>
+                </td>
               </ng-template>
             </ng-container>
             <ng-container *ngIf="departureInfo">
-              <td *ngIf="flight.departure_icao; else no_departure" (click)="onAirport(flight.departure_icao)" class="table-link">
+              <td *ngIf="flight.departure_icao; else no_departure" (click)="onAirport(flight.departure_icao)"
+                  class="table-link">
                 {{flight.departure_name ? flight.departure_name : flight.departure_icao}}
               </td>
               <ng-template #no_departure>
@@ -67,6 +74,13 @@
             </ng-container>
             <td>{{flight.altitude}}</td>
             <td>{{flight.speed}}</td>
+            <td *ngIf="flight.photo; else no_photo" (click)="onPhoto(flight.callsign, flight.id)"
+                class="table-link">
+              {{flight.callsign}}
+            </td>
+            <ng-template #no_photo>
+              <td></td>
+            </ng-template>
           </tr>
           </tbody>
         </table>
