@@ -74,13 +74,15 @@
             </ng-container>
             <td>{{flight.altitude}}</td>
             <td>{{flight.speed}}</td>
-            <td *ngIf="flight.photo; else no_photo" (click)="onPhoto(flight.callsign, flight.id)"
-                class="table-link">
-              {{flight.callsign}}
-            </td>
-            <ng-template #no_photo>
-              <td></td>
-            </ng-template>
+            <ng-container *ngIf="photoInfo">
+              <td *ngIf="flight.photo; else no_photo" (click)="onPhoto(flight.callsign, flight.id)"
+                  class="table-link">
+                {{flight.callsign}}
+              </td>
+              <ng-template #no_photo>
+                <td></td>
+              </ng-template>
+            </ng-container>
           </tr>
           </tbody>
         </table>
