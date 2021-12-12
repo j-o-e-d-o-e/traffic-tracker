@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class DataService {
+  callsignPhoto: string;
 
   constructor(private http: HttpClient) {
   }

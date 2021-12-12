@@ -24,7 +24,7 @@ const routes: Routes = [
   {path: 'airport/:icao', component: AirportComponent},
   {path: 'flights-graphql/:date', component: FlightsGraphqlComponent},
   {path: 'flights/:date', component: FlightsRestComponent},
-  {path: 'flights/photo/:callsign/:id', component: FlightsPhotoComponent},
+  {path: 'flights/:id/photo', component: FlightsPhotoComponent},
   {path: 'day', component: DayComponent},
   {path: 'day/:date', component: DayComponent},
   {path: 'week/:date', component: WeekComponent},

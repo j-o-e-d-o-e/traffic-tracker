@@ -17,7 +17,7 @@ export class FlightsPhotoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.callsign = this.route.snapshot.params.callsign;
+    this.callsign = this.service.callsignPhoto;
     this.photoURL = environment.urlBase + '/flights/' + this.route.snapshot.params.id + '/image';
     // console.log(this.photoURL);
   }

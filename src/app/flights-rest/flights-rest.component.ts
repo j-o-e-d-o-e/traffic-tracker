@@ -103,6 +103,7 @@ export class FlightsRestComponent implements OnInit {
   }
 
   onPhoto(callsign: string, id: number) {
-    this.router.navigate(['/flights/photo', callsign, id]).catch();
+    this.service.callsignPhoto = callsign;
+    this.router.navigate(['/flights/' + id + '/photo']).catch();
   }
 }
