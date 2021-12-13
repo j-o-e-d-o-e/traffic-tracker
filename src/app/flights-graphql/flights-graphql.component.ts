@@ -50,6 +50,7 @@ export class FlightsGraphqlComponent implements OnInit {
         this.loading = loading;
         // @ts-ignore
         this.setData(data.day.flights);
+        this.router.navigate(['/flights-graphql', this.date, this.page.pageNumber]).catch();
       },
       (error: any) => {
         this.error = true;

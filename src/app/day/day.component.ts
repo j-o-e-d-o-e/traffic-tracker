@@ -84,7 +84,7 @@ export class DayComponent implements OnInit {
 
   setData(day: Day) {
     this.day = day;
-    console.log(this.day);
+    // console.log(this.day);
     this.chartData = [];
     this.chartData.push({data: this.day.hours_flight, label: 'Absolute', yAxisID: 'y-axis-left'});
     this.chartData.push({
@@ -139,7 +139,7 @@ export class DayComponent implements OnInit {
   }
 
   onFlights() {
-    this.router.navigate(['/flights', this.day.date]).catch();
+    this.router.navigate(['/flights', this.day.date, 0]).catch();
   }
 
   onWeek() {

@@ -40,6 +40,7 @@ export class FlightsRestComponent implements OnInit {
         const responseTime = Date.now() - start;
         console.log('Response time: ' + responseTime + ' ms');
         this.setData(flights);
+        this.router.navigate(['/flights', this.flights._embedded.flightDtoes[0].date, this.flights.page.number]).catch();
         this.loading = false;
       },
       (message) => {
@@ -104,6 +105,6 @@ export class FlightsRestComponent implements OnInit {
 
   onPhoto(callsign: string, id: number) {
     this.service.callsignPhoto = callsign;
-    this.router.navigate(['/flights/' + id + '/photo']).catch();
+    this.router.navigate(['/flight', id, 'photo']).catch();
   }
 }
