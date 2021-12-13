@@ -18,10 +18,10 @@ import {FlightsPhotoComponent} from './flights-photo/flights-photo.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'plane/:icao', component: PlaneGraphqlComponent},
-  {path: 'plane-rest/:icao', component: PlaneRestComponent},
-  {path: 'airline/:icao', component: AirlineComponent},
-  {path: 'airport/:icao', component: AirportComponent},
+  {path: 'plane/:icao/:page', component: PlaneGraphqlComponent},
+  {path: 'plane-rest/:icao/:page', component: PlaneRestComponent},
+  {path: 'airline/:icao/:page', component: AirlineComponent},
+  {path: 'airport/:icao/:page', component: AirportComponent},
   {path: 'flights-graphql/:date/:page', component: FlightsGraphqlComponent},
   {path: 'flights/:date/:page', component: FlightsRestComponent},
   {path: 'flight/:id/photo', component: FlightsPhotoComponent},

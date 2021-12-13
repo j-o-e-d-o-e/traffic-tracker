@@ -33,7 +33,7 @@ export class FlightsGraphqlComponent implements OnInit {
     this.loading = true;
     this.departureInfo = false;
     this.date = this.route.snapshot.params.date;
-    this.sendQuery(0);
+    this.sendQuery(this.route.snapshot.params.page);
   }
 
   private sendQuery(page: number) {
@@ -86,15 +86,15 @@ export class FlightsGraphqlComponent implements OnInit {
   }
 
   onAirline(icao: string) {
-    this.router.navigate(['/airline', icao]).catch();
+    this.router.navigate(['/airline', icao, 0]).catch();
   }
 
   onAirport(icao: string) {
-    this.router.navigate(['/airport', icao]).catch();
+    this.router.navigate(['/airport', icao, 0]).catch();
   }
 
   onPlane(icao: string) {
-    this.router.navigate(['/plane', icao]).catch();
+    this.router.navigate(['/plane', icao, 0]).catch();
   }
 
   onFetch() {

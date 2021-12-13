@@ -21,14 +21,15 @@ export class PlaneRestComponent implements OnInit {
   errorMessage: string;
   @ViewChild('form')
   form: NgForm;
+  stdPageSize = 20;
 
   constructor(private service: DataService, private route: ActivatedRoute, private location: Location, private router: Router) {
   }
 
   ngOnInit() {
     this.loading = true;
-    this.fetch(environment.urlBase + '/planes/' + this.route.snapshot.params.icao + '/flights');
-
+    this.fetch(environment.urlBase + '/planes/' + this.route.snapshot.params.icao + '/flights'
+      + '?page=' + this.route.snapshot.params.page + '&size=' + this.stdPageSize);
   }
 
   // noinspection DuplicatedCode
@@ -39,6 +40,7 @@ export class PlaneRestComponent implements OnInit {
         const responseTime = Date.now() - start;
         console.log('Response time: ' + responseTime + ' ms');
         this.setData(flights);
+        this.router.navigate(['/plane', this.flights._embedded.flightDtoes[0].icao_24, this.flights.page.number]).catch();
         this.loading = false;
       },
       (message) => {
@@ -79,11 +81,11 @@ export class PlaneRestComponent implements OnInit {
   }
 
   onAirline(icao: string) {
-    this.router.navigate(['/airline-rest', icao]).catch();
+    this.router.navigate(['/airline-rest', icao, 0]).catch();
   }
 
   onAirport(icao: string) {
-    this.router.navigate(['/airport-rest', icao]).catch();
+    this.router.navigate(['/airport-rest', icao, 0]).catch();
   }
 
   // noinspection DuplicatedCode

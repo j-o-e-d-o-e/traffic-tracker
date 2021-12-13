@@ -21,6 +21,7 @@ export class FlightsRestComponent implements OnInit {
   errorMessage: string;
   @ViewChild('form')
   form: NgForm;
+  stdPageSize = 20;
 
   constructor(private service: DataService, private route: ActivatedRoute, private router: Router) {
   }
@@ -29,7 +30,8 @@ export class FlightsRestComponent implements OnInit {
     this.loading = true;
     this.departureInfo = false;
     this.photoInfo = false;
-    this.fetch(environment.urlBase + '/flights/' + this.route.snapshot.params.date);
+    this.fetch(environment.urlBase + '/flights/' + this.route.snapshot.params.date
+      + '?page=' + this.route.snapshot.params.page + '&size=' + this.stdPageSize);
   }
 
   // noinspection DuplicatedCode
@@ -79,15 +81,15 @@ export class FlightsRestComponent implements OnInit {
   }
 
   onPlane(icao: string) {
-    this.router.navigate(['/plane', icao]).catch();
+    this.router.navigate(['/plane', icao, 0]).catch();
   }
 
   onAirline(icao: string) {
-    this.router.navigate(['/airline', icao]).catch();
+    this.router.navigate(['/airline', icao, 0]).catch();
   }
 
   onAirport(icao: string) {
-    this.router.navigate(['/airport', icao]).catch();
+    this.router.navigate(['/airport', icao, 0]).catch();
   }
 
   // noinspection DuplicatedCode

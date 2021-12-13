@@ -30,7 +30,7 @@ export class PlaneGraphqlComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.icao = this.route.snapshot.params.icao;
-    this.sendQuery(0);
+    this.sendQuery(this.route.snapshot.params.page);
   }
 
   private sendQuery(page: number) {
@@ -47,6 +47,7 @@ export class PlaneGraphqlComponent implements OnInit {
         this.loading = loading;
         // @ts-ignore
         this.setData(data.plane.flights);
+        this.router.navigate(['/plane', this.icao, this.page.pageNumber]).catch();
       },
       (error: any) => {
         this.error = true;
@@ -80,11 +81,11 @@ export class PlaneGraphqlComponent implements OnInit {
   }
 
   onAirline(icao: string) {
-    this.router.navigate(['/airline', icao]).catch();
+    this.router.navigate(['/airline', icao, 0]).catch();
   }
 
   onAirport(icao: string) {
-    this.router.navigate(['/airport', icao]).catch();
+    this.router.navigate(['/airport', icao, 0]).catch();
   }
 
   checkDate(date: string) {

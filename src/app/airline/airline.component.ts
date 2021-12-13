@@ -24,7 +24,7 @@ export class AirlineComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.sendFirstQuery(this.route.snapshot.params.icao, 0);
+    this.sendFirstQuery(this.route.snapshot.params.icao, this.route.snapshot.params.page);
   }
 
   private sendFirstQuery(icao: string, page: number) {
@@ -38,6 +38,7 @@ export class AirlineComponent implements OnInit {
         this.airline = data.airline;
         // @ts-ignore
         this.setData(data.airline.flights);
+        this.router.navigate(['/airline', this.airline.icao, this.page.pageNumber]).catch();
       },
       (error: any) => {
         this.error = true;
@@ -54,6 +55,7 @@ export class AirlineComponent implements OnInit {
         this.loading = loading;
         // @ts-ignore
         this.setData(data.airline.flights);
+        this.router.navigate(['/airline', this.airline.icao, this.page.pageNumber]).catch();
       },
       (error: any) => {
         this.error = true;
@@ -87,11 +89,11 @@ export class AirlineComponent implements OnInit {
   }
 
   onAirport(icao: string) {
-    this.router.navigate(['/airport', icao]).catch();
+    this.router.navigate(['/airport', icao, 0]).catch();
   }
 
   onPlane(icao: string) {
-    this.router.navigate(['/plane', icao]).catch();
+    this.router.navigate(['/plane', icao, 0]).catch();
   }
 
   checkDate(date: string) {
