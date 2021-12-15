@@ -1,8 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {DataService} from '../service/data.service';
-import {ActivatedRoute} from '@angular/router';
-import {environment} from '../../environments/environment';
-import {Location} from '@angular/common';
+import {Component, Input, OnInit} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Flight} from '../model/flights.model';
 
 @Component({
   selector: 'app-flights-photo',
@@ -10,19 +8,17 @@ import {Location} from '@angular/common';
   styleUrls: ['./flights-photo.component.css', '../app.component.css']
 })
 export class FlightsPhotoComponent implements OnInit {
-  callsign: string;
-  photoURL: string;
+  @Input()
+  flight: Flight;
 
-  constructor(private service: DataService, private route: ActivatedRoute, private location: Location) {
+  constructor(public activeModal: NgbActiveModal) {
   }
 
   ngOnInit() {
-    this.callsign = this.service.callsignPhoto;
-    this.photoURL = environment.urlBase + '/flights/' + this.route.snapshot.params.id + '/image';
-    // console.log(this.photoURL);
+    // console.log(this.flight);
   }
 
-  onBack() {
-    this.location.back();
+  onClose() {
+    this.activeModal.dismiss('Cross click');
   }
 }

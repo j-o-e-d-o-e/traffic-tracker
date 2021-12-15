@@ -1,9 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {DataService} from '../service/data.service';
-import {Flights} from '../model/flights.model';
+import {Flight, Flights} from '../model/flights.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {NgForm} from '@angular/forms';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FlightsPhotoComponent} from '../flights-photo/flights-photo.component';
 
 @Component({
   selector: 'app-flights-rest',
@@ -23,7 +25,7 @@ export class FlightsRestComponent implements OnInit {
   form: NgForm;
   stdPageSize = 20;
 
-  constructor(private service: DataService, private route: ActivatedRoute, private router: Router) {
+  constructor(private service: DataService, private route: ActivatedRoute, private router: Router, private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -105,8 +107,8 @@ export class FlightsRestComponent implements OnInit {
     this.fetch(url);
   }
 
-  onPhoto(callsign: string, id: number) {
-    this.service.callsignPhoto = callsign;
-    this.router.navigate(['/flight', id, 'photo']).catch();
+  onPhoto(flight: Flight) {
+    const modalRef = this.modalService.open(FlightsPhotoComponent);
+    modalRef.componentInstance.flight = flight;
   }
 }

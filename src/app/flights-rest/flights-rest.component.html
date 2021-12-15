@@ -75,7 +75,7 @@
             <td>{{flight.altitude}}</td>
             <td>{{flight.speed}}</td>
             <ng-container *ngIf="photoInfo">
-              <td *ngIf="flight.photo; else no_photo" (click)="onPhoto(flight.callsign, flight.id)"
+              <td *ngIf="flight.photo; else no_photo" (click)="onPhoto(flight)"
                   class="table-link">
                 {{flight.callsign}}
               </td>

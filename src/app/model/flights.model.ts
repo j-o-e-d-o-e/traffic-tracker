@@ -30,6 +30,7 @@ export interface Flight {
   _links: {
     day: { href: string }
     icao_24: { href: string }
+    photo_url: {href: string}
     self: { href: string }
   };
 }
