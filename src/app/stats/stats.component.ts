@@ -30,7 +30,6 @@ export class StatsComponent implements OnInit {
   private setData(stats: Stats) {
     this.stats = stats;
     // console.log(this.stats);
-    console.log(this.stats.plane_with_most_flights_within_one_day.day.date);
   }
 
   onDay(s: string) {

@@ -55,7 +55,7 @@ export class FlightsRestComponent implements OnInit {
 
   private setData(flights: Flights) {
     this.flights = flights;
-    // console.log(flights);
+    // console.log(this.flights);
     this.airlinesInfo = this.airlinesStartDate <= new Date(this.flights._embedded.flightDtoes[0].date).setHours(0, 0, 0, 0);
     this.photoInfo = this.flights._embedded.flightDtoes.some(f => f.photo);
     for (const flight of this.flights._embedded.flightDtoes) {
