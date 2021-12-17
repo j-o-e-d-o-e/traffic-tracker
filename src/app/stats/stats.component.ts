@@ -29,10 +29,11 @@ export class StatsComponent implements OnInit {
 
   private setData(stats: Stats) {
     this.stats = stats;
-    // console.log(this.stats);
+    console.log(this.stats);
   }
 
   onDay(s: string) {
+    console.log(s);
     let day: string;
     let month: string;
     if (s[2].toString().length === 1) {
@@ -46,7 +47,7 @@ export class StatsComponent implements OnInit {
       month = s[1];
     }
     const date: string = s[0] + '-' + month + '-' + day;
-    // console.log(date);
+    console.log(date);
     this.router.navigate(['/day', date]).catch();
   }
 
