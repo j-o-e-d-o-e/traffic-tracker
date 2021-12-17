@@ -46,10 +46,11 @@ export class StatsComponent implements OnInit {
       month = s[1];
     }
     const date: string = s[0] + '-' + month + '-' + day;
+    // console.log(date);
     this.router.navigate(['/day', date]).catch();
   }
 
   onIcao(icao: string) {
-    this.router.navigate(['/plane', icao]).catch();
+    this.router.navigate(['/plane', icao, 0]).catch();
   }
 }
