@@ -60,7 +60,7 @@ export class WeekComponent implements OnInit {
 
   setData(week: Week) {
     this.week = week;
-    console.log(this.week);
+    // console.log(this.week);
     this.chartData = [];
     this.chartData.push({data: this.week.weekdays, label: 'Absolute'});
     this.chartData.push({data: this.week.avg_flights, label: 'Average', type: 'line', fill: false});

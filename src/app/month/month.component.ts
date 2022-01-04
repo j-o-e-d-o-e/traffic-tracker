@@ -57,7 +57,7 @@ export class MonthComponent implements OnInit {
 
   private setData(month: Month) {
     this.month = month;
-    console.log(this.month);
+    // console.log(this.month);
     const monthLength = this.month.days.length;
     this.chartLabels = [];
     const tmp = new Date(month.start_date);
