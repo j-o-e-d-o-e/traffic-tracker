@@ -6,6 +6,7 @@ export interface Week {
   avg_flights: number[];
   avg_speed: number;
   end_date: string;
+  first_day: string;
   month: number;
   next: boolean;
   now: string;

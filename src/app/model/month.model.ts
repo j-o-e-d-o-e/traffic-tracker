@@ -9,6 +9,7 @@ export interface Month {
   days_with_less_than_thirty_flights: number;
   end_date: string;
   first_day_of_month: number;
+  first_week: string;
   month: number;
   next: boolean;
   now: string;

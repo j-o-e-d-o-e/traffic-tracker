@@ -57,7 +57,7 @@ export class MonthComponent implements OnInit {
 
   private setData(month: Month) {
     this.month = month;
-    // console.log(this.month);
+    console.log(this.month);
     const monthLength = this.month.days.length;
     this.chartLabels = [];
     const tmp = new Date(month.start_date);
@@ -94,7 +94,7 @@ export class MonthComponent implements OnInit {
   }
 
   onWeeks() {
-    this.router.navigate(['/week', this.month.first_day_of_month]).catch();
+    this.router.navigate(['/week', this.month.first_week]).catch();
   }
 
   onYear() {
