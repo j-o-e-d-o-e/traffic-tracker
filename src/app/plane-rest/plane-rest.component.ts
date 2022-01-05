@@ -1,10 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Flights} from '../model/flights.model';
+import {Flight, Flights} from '../model/flights.model';
 import {DataService} from '../service/data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {environment} from '../../environments/environment';
 import {NgForm} from '@angular/forms';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FlightsPhotoComponent} from '../flights-photo/flights-photo.component';
 
 @Component({
   selector: 'app-plane-rest',
@@ -17,17 +19,20 @@ export class PlaneRestComponent implements OnInit {
   departureStartDate: number = new Date(environment.departuresStartDate).setHours(0, 0, 0, 0);
   airlinesStartDate: number = new Date(environment.airlinesStartDate).setHours(0, 0, 0, 0);
   airlinesInfo: boolean;
+  photoInfo: boolean;
   error = false;
   errorMessage: string;
   @ViewChild('form')
   form: NgForm;
   stdPageSize = 20;
 
-  constructor(private service: DataService, private route: ActivatedRoute, private location: Location, private router: Router) {
+  constructor(private service: DataService, private modalService: NgbModal,
+              private route: ActivatedRoute, private location: Location, private router: Router) {
   }
 
   ngOnInit() {
     this.loading = true;
+    this.photoInfo = false;
     this.fetch(environment.urlBase + '/planes/' + this.route.snapshot.params.icao + '/flights'
       + '?page=' + this.route.snapshot.params.page + '&size=' + this.stdPageSize);
   }
@@ -51,8 +56,9 @@ export class PlaneRestComponent implements OnInit {
 
   private setData(data: Flights) {
     this.flights = data;
-    // console.log(this.flights);
+    console.log(this.flights);
     this.airlinesInfo = this.airlinesStartDate <= new Date(this.flights._embedded.flightDtoes[0].date).setHours(0, 0, 0, 0);
+    this.photoInfo = this.flights._embedded.flightDtoes.some(f => f.photo);
   }
 
   onPrev() {
@@ -99,5 +105,10 @@ export class PlaneRestComponent implements OnInit {
     }
     const url = environment.urlBase + '/planes/' + this.route.snapshot.params.icao + '/flights?page=0&size=' + size;
     this.fetch(url);
+  }
+
+  onPhoto(flight: Flight) {
+    const modalRef = this.modalService.open(FlightsPhotoComponent);
+    modalRef.componentInstance.flight = flight;
   }
 }

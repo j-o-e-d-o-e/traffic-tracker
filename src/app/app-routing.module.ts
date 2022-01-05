@@ -17,8 +17,8 @@ import {PlaneRestComponent} from './plane-rest/plane-rest.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'plane/:icao/:page', component: PlaneGraphqlComponent},
-  {path: 'plane-rest/:icao/:page', component: PlaneRestComponent},
+  {path: 'plane-graphql/:icao/:page', component: PlaneGraphqlComponent},
+  {path: 'plane/:icao/:page', component: PlaneRestComponent},
   {path: 'airline/:icao/:page', component: AirlineComponent},
   {path: 'airport/:icao/:page', component: AirportComponent},
   {path: 'flights-graphql/:date/:page', component: FlightsGraphqlComponent},

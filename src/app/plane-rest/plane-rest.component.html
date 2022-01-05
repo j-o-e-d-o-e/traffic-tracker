@@ -44,6 +44,7 @@
             <th>Callsign</th>
             <th>Airline</th>
             <th>Departure</th>
+            <th *ngIf="photoInfo">Photo</th>
           </tr>
           </thead>
           <tbody>
@@ -68,6 +69,15 @@
             <ng-template #before_departure_start_date>
               <td></td>
             </ng-template>
+            <ng-container *ngIf="photoInfo">
+              <td *ngIf="flight.photo; else no_photo" (click)="onPhoto(flight)"
+                  class="table-link">
+                {{flight.callsign}}
+              </td>
+              <ng-template #no_photo>
+                <td></td>
+              </ng-template>
+            </ng-container>
           </tr>
           </tbody>
         </table>
