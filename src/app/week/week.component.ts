@@ -40,14 +40,16 @@ export class WeekComponent implements OnInit {
   error = false;
   errorMessage: string;
 
-  constructor(private  service: DataService, private route: ActivatedRoute, private router: Router) {
+  constructor(private service: DataService, private route: ActivatedRoute, private router: Router) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
 
   ngOnInit() {
     this.loading = true;
-    this.service.fetch(environment.urlBase + '/weeks/' + this.route.snapshot.params.date).subscribe(
+    const date = this.route.snapshot.params.date;
+    const path = date ? '/weeks' + date : '/weeks/current';
+    this.service.fetch(environment.urlBase + path).subscribe(
       (week: Week) => {
         this.setData(week);
         this.loading = false;

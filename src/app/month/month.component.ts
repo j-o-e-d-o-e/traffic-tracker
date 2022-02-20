@@ -44,7 +44,9 @@ export class MonthComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     const params = this.route.snapshot.params;
-    this.service.fetch(environment.urlBase + '/months/' + params.year + '/' + params.month).subscribe(
+    console.log('Params:' + params);
+    const path = params.year && params.month ? '/months/' + params.year + '/' + params.month : '/months/current';
+    this.service.fetch(environment.urlBase + path).subscribe(
       (month: Month) => {
         this.setData(month);
         this.loading = false;

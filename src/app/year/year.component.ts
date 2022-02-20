@@ -43,9 +43,11 @@ export class YearComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.service.fetch(environment.urlBase + '/years/' + this.route.snapshot.params.year).subscribe(
-      (year: Year) => {
-        this.setData(year);
+    const year = this.route.snapshot.params.year;
+    const path = year ? '/years/' + year : '/years/current';
+    this.service.fetch(environment.urlBase + path).subscribe(
+      (y: Year) => {
+        this.setData(y);
         this.loading = false;
       },
       (message) => {

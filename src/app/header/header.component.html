@@ -8,8 +8,22 @@
       <li class="nav-item">
         <a class="nav-link" routerLinkActive="active" routerLink="home" (click)="open=false">Calendar</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="day" (click)="open=false">Flights</a>
+      <li ngbDropdown class="nav-item">
+        <a ngbDropdownToggle class="nav-link">Flights</a>
+        <ul ngbDropdownMenu class="nav-menu-dropdown">
+          <li class="nav-item">
+            <a ngbDropdownItem class="nav-link-dropdown" routerLinkActive="active" routerLink="day">Day</a>
+          </li>
+          <li class="nav-item">
+            <a ngbDropdownItem class="nav-link-dropdown" routerLinkActive="active" routerLink="week" (click)="open=false">Week</a>
+          </li>
+          <li class="nav-item">
+            <a ngbDropdownItem class="nav-link-dropdown" routerLinkActive="active" routerLink="month" (click)="open=false">Month</a>
+          </li>
+          <li class="nav-item">
+            <a ngbDropdownItem class="nav-link-dropdown" routerLinkActive="active" routerLink="year" (click)="open=false">Year</a>
+          </li>
+        </ul>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLinkActive="active" routerLink="forecast" (click)="open=false">Forecast</a>
@@ -19,15 +33,10 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-<!--      <li class="nav-item">-->
-<!--        <a class="nav-link" href="https://traffic-tracker.herokuapp.com/browser/index.html" target="_blank">HAL</a>-->
-<!--      </li>-->
       <li class="nav-item">
-        <a class="nav-link" href="https://traffic-tracker.herokuapp.com/swagger-ui/index.html" target="_blank">Swagger</a>
+        <a class="nav-link" href="https://traffic-tracker.herokuapp.com/swagger-ui/index.html"
+           target="_blank">Swagger</a>
       </li>
-<!--      <li class="nav-item">-->
-<!--        <a class="nav-link" href="https://traffic-tracker.herokuapp.com/voyager" target="_blank">Voyager</a>-->
-<!--      </li>-->
       <li class="nav-item">
         <a class="nav-link" href="https://traffic-tracker.herokuapp.com/graphiql" target="_blank">GraphiQL</a>
       </li>
