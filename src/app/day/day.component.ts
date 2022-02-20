@@ -60,7 +60,8 @@ export class DayComponent implements OnInit {
         (day: Day) => {
           this.setData(day);
           this.loading = false;
-          AppComponent.startup = false;
+          this.startup = false;
+          AppComponent.startup = this.startup;
         },
         (message) => {
           this.error = true;

@@ -6,6 +6,6 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  static startup: boolean;
+  static startup = true;
   title = 'traffic-tracker';
 }
