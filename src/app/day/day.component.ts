@@ -5,6 +5,7 @@ import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Day} from '../model/day.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-day',
@@ -52,14 +53,14 @@ export class DayComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.startup = AppComponent.startup;
     const date = this.route.snapshot.params.date;
     if (!date) {
-      this.startup = true;
       this.service.fetch(environment.urlBase + '/days/current').subscribe(
         (day: Day) => {
           this.setData(day);
           this.loading = false;
-          this.startup = false;
+          AppComponent.startup = false;
         },
         (message) => {
           this.error = true;
