@@ -48,7 +48,7 @@ export class WeekComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     const date = this.route.snapshot.params.date;
-    const path = date ? '/weeks' + date : '/weeks/current';
+    const path = date ? '/weeks/' + date : '/weeks/current';
     this.service.fetch(environment.urlBase + path).subscribe(
       (week: Week) => {
         this.setData(week);
