@@ -73,7 +73,7 @@ import {FlightsPhotoComponent} from './flights-photo/flights-photo.component';
         return {
           cache: new InMemoryCache(),
           link: httpLink.create({
-            uri: environment.uriGraphQL,
+            uri: environment.urlGraphQL,
           }),
         };
       },

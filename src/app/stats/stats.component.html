@@ -13,15 +13,16 @@
     <div class="col">
       <ul>
         <li>
-          <strong>Total flights</strong>: {{stats.total | number}}
+          <strong>Total flights</strong>: {{stats.flights_total | number}}
         </li>
         <li>
           <strong>Most flights</strong>: {{stats.day_with_most_flights.stats}} on <span class="table-link"
-          (click)="onDay(stats.day_with_most_flights.day.date)">{{stats.day_with_most_flights.day.date | date :'EEEE, dd.MM.yyyy'}}</span>
+                                                                                        (click)="onDay(stats.day_with_most_flights.date)">{{stats.day_with_most_flights.date | date :'EEEE, dd.MM.yyyy'}}</span>
         </li>
         <li>
-          <strong>Most flights within one hour</strong>: {{stats.day_with_most_flights_within_one_hour.stats}} on <span class="table-link"
-          (click)="onDay(stats.day_with_most_flights_within_one_hour.day.date)">{{stats.day_with_most_flights_within_one_hour.day.date | date :'EEEE, dd.MM.yyyy'}}</span>
+          <strong>Most flights within one hour</strong>: {{stats.day_with_most_flights_within_one_hour.stats}} on <span
+          class="table-link"
+          (click)="onDay(stats.day_with_most_flights_within_one_hour.date)">{{stats.day_with_most_flights_within_one_hour.date | date :'EEEE, dd.MM.yyyy'}}</span>
         </li>
         <li>
           <strong>Less than thirty flights</strong>: {{stats.days_with_less_than_thirty_flights}}%
@@ -51,34 +52,38 @@
       <ul>
         <li>
           <strong>Most flights</strong>: {{stats.plane_with_most_flights.stats}} by plane "<span class="table-link"
-          (click)="onPlane(stats.plane_with_most_flights.icao)">{{stats.plane_with_most_flights.icao}}</span>"
+                                                                                                 (click)="onPlane(stats.plane_with_most_flights.icao)">{{stats.plane_with_most_flights.icao}}</span>"
         </li>
         <li>
           <strong>Most flights within one day</strong>: {{stats.plane_with_most_flights_within_one_day.stats}} by plane
           "<span class="table-link"
-          (click)="onPlane(stats.plane_with_most_flights_within_one_day.icao)">{{stats.plane_with_most_flights_within_one_day.icao}}</span>"
+                 (click)="onPlane(stats.plane_with_most_flights_within_one_day.icao)">{{stats.plane_with_most_flights_within_one_day.icao}}</span>"
           on <span class="table-link"
-          (click)="onDay(stats.plane_with_most_flights_within_one_day.day.date)">{{stats.plane_with_most_flights_within_one_day.day.date | date :'EEEE, dd.MM.'}}</span>
+                   (click)="onDay(stats.plane_with_most_flights_within_one_day.date)">{{stats.plane_with_most_flights_within_one_day.date | date :'EEEE, dd.MM.'}}</span>
         </li>
         <li>
-          <strong>Max altitude</strong>: {{stats.max_altitude.altitude}} m by plane "<span class="table-link"
-          (click)="onPlane(stats.max_altitude.icao_24)">{{stats.max_altitude.icao_24}}</span>" on <span class="table-link"
-          (click)="onDay(stats.max_altitude.date)">{{stats.max_altitude.date | date :'EEEE, dd.MM.'}}</span>
+          <strong>Max altitude</strong>: {{stats.max_altitude.stats}} m by plane "<span class="table-link"
+                                                                                        (click)="onPlane(stats.max_altitude.icao)">{{stats.max_altitude.icao}}</span>"
+          on <span class="table-link"
+                   (click)="onDay(stats.max_altitude.date)">{{stats.max_altitude.date | date :'EEEE, dd.MM.'}}</span>
         </li>
         <li>
-          <strong>Min altitude</strong>: {{stats.min_altitude.altitude}} m by plane "<span class="table-link"
-          (click)="onPlane(stats.min_altitude.icao_24)">{{stats.min_altitude.icao_24}}</span>" on <span class="table-link"
-          (click)="onDay(stats.min_altitude.date)">{{stats.min_altitude.date | date :'EEEE, dd.MM.'}}</span>
+          <strong>Min altitude</strong>: {{stats.min_altitude.stats}} m by plane "<span class="table-link"
+                                                                                        (click)="onPlane(stats.min_altitude.icao)">{{stats.min_altitude.icao}}</span>"
+          on <span class="table-link"
+                   (click)="onDay(stats.min_altitude.date)">{{stats.min_altitude.date | date :'EEEE, dd.MM.'}}</span>
         </li>
         <li>
-          <strong>Max speed</strong>: {{stats.max_speed.speed}} km/h by plane "<span class="table-link"
-          (click)="onPlane(stats.max_speed.icao_24)">{{stats.max_speed.icao_24}}</span>"
-          on <span class="table-link" (click)="onDay(stats.max_speed.date)">{{stats.max_speed.date | date :'EEEE, dd.MM.'}}</span>
+          <strong>Max speed</strong>: {{stats.max_speed.stats}} km/h by plane "<span class="table-link"
+                                                                                     (click)="onPlane(stats.max_speed.icao)">{{stats.max_speed.icao}}</span>"
+          on <span class="table-link"
+                   (click)="onDay(stats.max_speed.date)">{{stats.max_speed.date | date :'EEEE, dd.MM.'}}</span>
         </li>
         <li>
-          <strong>Min speed</strong>: {{stats.min_speed.speed}} km/h by plane "<span class="table-link"
-          (click)="onPlane(stats.min_speed.icao_24)">{{stats.min_speed.icao_24}}</span>"
-          on <span class="table-link" (click)="onDay(stats.min_speed.date)">{{stats.min_speed.date | date :'EEEE, dd.MM.'}}</span>
+          <strong>Min speed</strong>: {{stats.min_speed.stats}} km/h by plane "<span class="table-link"
+                                                                                     (click)="onPlane(stats.min_speed.icao)">{{stats.min_speed.icao}}</span>"
+          on <span class="table-link"
+                   (click)="onDay(stats.min_speed.date)">{{stats.min_speed.date | date :'EEEE, dd.MM.'}}</span>
         </li>
       </ul>
     </div>

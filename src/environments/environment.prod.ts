@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  urlBase: 'https://traffic-tracker.herokuapp.com/api',
-  uriGraphQL: 'https://traffic-tracker.herokuapp.com/graphql',
+  urlBase: 'https://traffic-tracker-817b828649ad.herokuapp.com/api',
+  urlGraphQL: 'https://traffic-tracker-817b828649ad.herokuapp.com/graphiql',
   startYear: 2019,
   startMonth: 9,
   startDay: 9,
