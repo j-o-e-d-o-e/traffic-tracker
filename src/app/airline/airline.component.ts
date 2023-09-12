@@ -31,7 +31,7 @@ export class AirlineComponent implements OnInit {
     this.client
       .query({
         query: FLIGHTS_BY_AIRLINE_INITIAL,
-        variables: {icao, page}
+        variables: {icao, page: +page}
       }).subscribe(({data, loading}) => {
         this.loading = loading;
         // @ts-ignore

@@ -45,7 +45,7 @@ export class PlaneRestComponent implements OnInit {
         const responseTime = Date.now() - start;
         console.log('Response time: ' + responseTime + ' ms');
         this.setData(flights);
-        this.router.navigate(['/plane', this.flights._embedded.flightDtoes[0].icao_24, this.flights.page.number]).catch();
+        this.router.navigate(['/plane', this.flights._embedded.flightDtoList[0].icao_24, this.flights.page.number]).catch();
         this.loading = false;
       },
       (message) => {
@@ -57,8 +57,8 @@ export class PlaneRestComponent implements OnInit {
   private setData(data: Flights) {
     this.flights = data;
     console.log(this.flights);
-    this.airlinesInfo = this.airlinesStartDate <= new Date(this.flights._embedded.flightDtoes[0].date).setHours(0, 0, 0, 0);
-    this.photoInfo = this.flights._embedded.flightDtoes.some(f => f.photo);
+    this.airlinesInfo = this.airlinesStartDate <= new Date(this.flights._embedded.flightDtoList[0].date).setHours(0, 0, 0, 0);
+    this.photoInfo = this.flights._embedded.flightDtoList.some(f => f.photo);
   }
 
   onPrev() {

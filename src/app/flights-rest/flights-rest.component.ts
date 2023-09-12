@@ -44,7 +44,7 @@ export class FlightsRestComponent implements OnInit {
         const responseTime = Date.now() - start;
         console.log('Response time: ' + responseTime + ' ms');
         this.setData(flights);
-        this.router.navigate(['/flights', this.flights._embedded.flightDtoes[0].date, this.flights.page.number]).catch();
+        this.router.navigate(['/flights', this.flights._embedded.flightDtoList[0].date, this.flights.page.number]).catch();
         this.loading = false;
       },
       (message) => {
@@ -56,9 +56,9 @@ export class FlightsRestComponent implements OnInit {
   private setData(flights: Flights) {
     this.flights = flights;
     // console.log(this.flights);
-    this.airlinesInfo = this.airlinesStartDate <= new Date(this.flights._embedded.flightDtoes[0].date).setHours(0, 0, 0, 0);
-    this.photoInfo = this.flights._embedded.flightDtoes.some(f => f.photo);
-    for (const flight of this.flights._embedded.flightDtoes) {
+    this.airlinesInfo = this.airlinesStartDate <= new Date(this.flights._embedded.flightDtoList[0].date).setHours(0, 0, 0, 0);
+    this.photoInfo = this.flights._embedded.flightDtoList.some(f => f.photo);
+    for (const flight of this.flights._embedded.flightDtoList) {
       if (flight.departure_icao !== undefined) {
         this.departureInfo = true;
         break;
@@ -79,7 +79,7 @@ export class FlightsRestComponent implements OnInit {
   }
 
   onDay() {
-    this.router.navigate(['/day', this.flights._embedded.flightDtoes[0].date]).catch();
+    this.router.navigate(['/day', this.flights._embedded.flightDtoList[0].date]).catch();
   }
 
   onPlane(icao: string) {

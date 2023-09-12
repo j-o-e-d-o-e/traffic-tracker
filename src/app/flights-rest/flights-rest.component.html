@@ -27,7 +27,7 @@
 
   <div class="row">
     <div class="col">
-      <h3>{{flights._embedded.flightDtoes[0].date | date :'EE, dd.MM.yy'}}</h3>
+      <h3>{{flights._embedded.flightDtoList[0].date | date :'EE, dd.MM.yy'}}</h3>
     </div>
   </div>
 
@@ -47,7 +47,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let flight of flights._embedded.flightDtoes">
+          <tr *ngFor="let flight of flights._embedded.flightDtoList">
             <td>{{flight.date_time | date: 'HH:mm:ss'}}</td>
             <td (click)="onPlane(flight.icao_24)">
               <div class="table-link">{{flight.icao_24}}</div>

@@ -1,6 +1,6 @@
 export interface Flights {
   _embedded: {
-    flightDtoes: Flight[]
+    flightDtoList: Flight[]
   };
   _links: {
     next: { href: string }

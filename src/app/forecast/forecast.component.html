@@ -24,7 +24,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let hour of forecast.hours">
-              <td><strong>{{hour.time[0]}}:00h</strong></td>
+              <td><strong>{{hour.time.slice(0, -3)}}h</strong></td>
               <td>{{hour.wind_degree}}</td>
               <td>{{hour.probability}}</td>
             </tr>
