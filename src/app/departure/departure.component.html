@@ -1,0 +1,31 @@
+<hr>
+<div class="row">
+  <div class="col text-center">
+    <h3>Departures
+      <small *ngIf="subHeadline"><br>(since {{startDateDepartures| date :'dd.MM.yyyy'}})</small>
+    </h3>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <canvas baseChart class="chart" width="500" height="500"
+            [data]="chartData"
+            [options]="chartOptions"
+            [type]="chartType">
+    </canvas>
+  </div>
+</div>
+
+<br>
+<div class="row">
+  <div class="col">
+    <h4 class="text-center">Top airports <small>(flights)</small></h4>
+    <ol>
+      <li *ngFor="let airport of airports">
+        <strong>{{airport.name}}</strong> ({{airport.flights}})
+      </li>
+    </ol>
+  </div>
+</div>

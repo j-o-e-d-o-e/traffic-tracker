@@ -1,28 +1,19 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {AirlineComponent} from './airline/airline.component';
-import {HomeComponent} from './home/home.component';
-import {FlightsRestComponent} from './flights-rest/flights-rest.component';
-import {DayComponent} from './day/day.component';
-import {WeekComponent} from './week/week.component';
-import {MonthComponent} from './month/month.component';
-import {ForecastComponent} from './forecast/forecast.component';
-import {StatsComponent} from './stats/stats.component';
-import {ErrorComponent} from './error/error.component';
-import {YearComponent} from './year/year.component';
-import {AirportComponent} from './airport/airport.component';
-import {PlaneGraphqlComponent} from './plane-graphql/plane-graphql.component';
-import {FlightsGraphqlComponent} from './flights-graphql/flights-graphql.component';
-import {PlaneRestComponent} from './plane-rest/plane-rest.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import {DayComponent} from "./day/day.component";
+import {WeekComponent} from "./week/week.component";
+import {MonthComponent} from "./month/month.component";
+import {YearComponent} from "./year/year.component";
+import {StatsComponent} from "./stats/stats.component";
+import {ForecastComponent} from "./forecast/forecast.component";
+import {HomeComponent} from "./home/home.component";
+import {FlightComponent} from "./flight/flight.component";
+import {AirportComponent} from "./airport/airport.component";
+import {AirlineComponent} from "./airline/airline.component";
+import {PlaneComponent} from "./plane/plane.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'plane-graphql/:icao/:page', component: PlaneGraphqlComponent},
-  {path: 'plane/:icao/:page', component: PlaneRestComponent},
-  {path: 'airline/:icao/:page', component: AirlineComponent},
-  {path: 'airport/:icao/:page', component: AirportComponent},
-  {path: 'flights-graphql/:date/:page', component: FlightsGraphqlComponent},
-  {path: 'flights/:date/:page', component: FlightsRestComponent},
   {path: 'day', component: DayComponent},
   {path: 'day/:date', component: DayComponent},
   {path: 'week', component: WeekComponent},
@@ -33,7 +24,10 @@ const routes: Routes = [
   {path: 'year/:year', component: YearComponent},
   {path: 'forecast', component: ForecastComponent},
   {path: 'stats', component: StatsComponent},
-  {path: 'error', component: ErrorComponent},
+  {path: 'flights/:date/:page', component: FlightComponent},
+  {path: 'plane/:icao/:page', component: PlaneComponent},
+  {path: 'airport/:icao/:page', component: AirportComponent},
+  {path: 'airline/:icao/:page', component: AirlineComponent},
   {path: '**', redirectTo: 'day', pathMatch: 'full'}
 ];
 
@@ -41,5 +35,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }

@@ -4,13 +4,14 @@ import {Location} from '@angular/common';
 @Component({
   selector: 'app-error',
   templateUrl: './error.component.html',
-  styleUrls: ['./error.component.css', '../app.component.css']
+  styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit {
   @Input()
   message: string;
 
-  constructor(private location: Location) { }
+  constructor(private location: Location) {
+  }
 
   ngOnInit() {
   }

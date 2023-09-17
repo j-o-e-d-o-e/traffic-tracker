@@ -1,29 +1,34 @@
 import {Component, OnInit} from '@angular/core';
-import {DataService} from '../service/data.service';
-import {Stats} from '../model/stats.model';
-import {environment} from '../../environments/environment';
-import {Router} from '@angular/router';
-import {monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip} from 'ng2-charts';
+import {Stats} from "../model/stats.model";
+import {environment} from "../../environments/environment";
+import {DataService} from "../service/data.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
-  styleUrls: ['./stats.component.css', '../app.component.css']
+  styleUrls: ['./stats.component.css']
 })
 export class StatsComponent implements OnInit {
   stats: Stats;
+  loading = true;
+  error = false;
+  errorMessage: string;
   startDate: Date = new Date(environment.startYear, environment.startMonth - 1, environment.startDay);
-  active: boolean;
 
   constructor(private service: DataService, private router: Router) {
-    monkeyPatchChartJsTooltip();
-    monkeyPatchChartJsLegend();
   }
 
   ngOnInit() {
-    this.service.fetch(environment.urlBase + '/stats').subscribe((stats: Stats) => {
-      this.setData(stats);
-      this.active = true;
+    this.service.fetch(environment.urlBase + '/stats').subscribe({
+      next: (stats: any) => {
+        this.setData(stats);
+        this.loading = false;
+      },
+      error: (error) => {
+        this.error = true;
+        this.errorMessage = error.message;
+      }
     });
   }
 

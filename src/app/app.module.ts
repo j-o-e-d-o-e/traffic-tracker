@@ -1,85 +1,69 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
+import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgChartsModule} from 'ng2-charts';
+import {HttpClientModule} from "@angular/common/http";
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {APOLLO_OPTIONS} from 'apollo-angular';
-import {HttpLink} from 'apollo-angular/http';
-import {InMemoryCache} from '@apollo/client/core';
-import {environment} from '../environments/environment';
-import {AirlineComponent} from './airline/airline.component';
-import {DataService} from './service/data.service';
-import {FooterComponent} from './footer/footer.component';
-import {HeaderComponent} from './header/header.component';
-import {DayComponent} from './day/day.component';
-import {WeekComponent} from './week/week.component';
-import {MonthComponent} from './month/month.component';
-import {YearComponent} from './year/year.component';
-import {FlightsRestComponent} from './flights-rest/flights-rest.component';
-import {HomeComponent} from './home/home.component';
-import {ForecastComponent} from './forecast/forecast.component';
+import {FormsModule} from "@angular/forms";
+import {GraphQLModule} from './graphql.module';
+import {AppComponent} from './app.component';
+import {DataService} from "./service/data.service";
 import {ErrorComponent} from './error/error.component';
-import {StatsComponent} from './stats/stats.component';
-import {DepartureComponent} from './departure-pie/departure.component';
-import {FormsModule} from '@angular/forms';
-import {ChartsModule} from 'ng2-charts';
-import {TooltipModule} from 'ng2-tooltip-directive';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {AirportComponent} from './airport/airport.component';
-import {PlaneGraphqlComponent} from './plane-graphql/plane-graphql.component';
-import {FlightsGraphqlComponent} from './flights-graphql/flights-graphql.component';
-import {PlaneRestComponent} from './plane-rest/plane-rest.component';
 import {SpinnerComponent} from './spinner/spinner.component';
-import {FlightsPhotoComponent} from './flights-photo/flights-photo.component';
+import {HeaderComponent} from './header/header.component';
+import {HomeComponent} from './home/home.component';
+import {StatsComponent} from './stats/stats.component';
+import {ForecastComponent} from './forecast/forecast.component';
+import {YearComponent} from './year/year.component';
+import {MonthComponent} from './month/month.component';
+import {WeekComponent} from './week/week.component';
+import {DayComponent} from './day/day.component';
+import {DepartureComponent} from './departure/departure.component';
+import {FlightComponent} from './flight/flight.component';
+import {PlaneComponent} from "./plane/plane.component";
+import {AirportComponent} from './airport/airport.component';
+import {FooterComponent} from './footer/footer.component';
+import {AirlineComponent} from "./airline/airline.component";
+import {PhotoComponent} from "./photo/photo.component";
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
+    ErrorComponent,
+    SpinnerComponent,
     HeaderComponent,
-    DayComponent,
-    WeekComponent,
-    MonthComponent,
-    YearComponent,
     HomeComponent,
     ForecastComponent,
-    ErrorComponent,
     StatsComponent,
+    YearComponent,
+    MonthComponent,
+    WeekComponent,
+    DayComponent,
     DepartureComponent,
-    FlightsGraphqlComponent,
-    FlightsRestComponent,
-    AirlineComponent,
+    FlightComponent,
+    PlaneComponent,
     AirportComponent,
-    PlaneGraphqlComponent,
-    PlaneRestComponent,
-    SpinnerComponent,
-    FlightsPhotoComponent
+    AirlineComponent,
+    PhotoComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    FontAwesomeModule,
+    NgbDropdown,
+    NgbDropdownToggle,
+    NgbDropdownMenu,
+    NgbDropdownItem,
     NgbModule,
-    TooltipModule,
-    ChartsModule,
+    NgChartsModule,
+    FontAwesomeModule,
+    FormsModule,
+    GraphQLModule
   ],
-  providers: [DataService,
-    {
-      provide: APOLLO_OPTIONS,
-      useFactory: (httpLink: HttpLink) => {
-        return {
-          cache: new InMemoryCache(),
-          link: httpLink.create({
-            uri: environment.urlGraphQL,
-          }),
-        };
-      },
-      deps: [HttpLink],
-    },
-  ],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

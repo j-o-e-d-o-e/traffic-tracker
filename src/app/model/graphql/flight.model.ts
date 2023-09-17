@@ -7,9 +7,10 @@ export interface Flight {
   date: string;
   time: string;
   callsign: string;
-  departure: Airport;
+  departure: Airport | undefined;
   airline: Airline;
   plane: Plane;
   altitude: number;
   speed: number;
+  photo: string;
 }

@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h5 class="modal-title">
+    {{flight.callsign}}
+    <small>{{flight.date | date: 'dd.MM.yy'}}, {{flight.time | slice:0:5}}h</small>
+  </h5>
+  <button type="button" class="close closing-x" aria-label="Close" (click)="onClose()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <img [src]="flight.photo_url" alt="photo" class="photo">
+</div>

@@ -1,8 +1,7 @@
-<div *ngIf="active">
-
+<div *ngIf="!loading">
   <br>
   <div class="row">
-    <div class="col">
+    <div class="col text-center">
       <h3>
         Days <small><br>(since {{startDate| date :'dd.MM.yyyy'}})</small>
       </h3>
@@ -35,12 +34,12 @@
   </div>
 
   <div *ngIf="stats.airports != undefined">
-    <app-airports [departures]="stats.departures" [airports]="stats.airports" [subHeadline]="true"></app-airports>
+    <app-departure [departures]="stats.departures" [airports]="stats.airports" [subHeadline]="true"></app-departure>
   </div>
 
   <hr>
   <div class="row">
-    <div class="col">
+    <div class="col text-center">
       <h3>
         Flights <small>(last 7 days)</small>
       </h3>
@@ -91,7 +90,7 @@
 
   <div class="row" *ngIf="stats.airlines !== undefined && stats.airlines.length > 0">
     <div class="col">
-      <h4>Top airlines <small>(flights)</small></h4>
+      <h4 class="text-center">Top airlines <small>(flights)</small></h4>
       <ol>
         <li *ngFor="let airline of stats.airlines">
           <strong>{{airline.name}}</strong> ({{airline.flights}})
@@ -102,7 +101,7 @@
 
   <hr>
   <div class="row">
-    <div class="col">
+    <div class="col text-center">
       <h3>
         Forecasts <small>(last 30 days)</small>
       </h3>
@@ -129,7 +128,7 @@
     <div class="col">
       <div class="table-responsive">
         <table class="table table-sm table-striped table-bordered table-hover">
-          <thead class="thead-dark">
+          <thead class="table-dark">
           <tr>
             <th></th>
             <th>No flights predicted</th>
@@ -152,11 +151,17 @@
       </div>
     </div>
   </div>
+  <app-footer></app-footer>
+</div>
 
-  <div class="row">
-    <div class="col">
-      <app-footer></app-footer>
+<div class="row" *ngIf="loading">
+  <div class="col">
+    <div class="text-center">
+      <app-spinner></app-spinner>
     </div>
   </div>
+</div>
 
+<div *ngIf="error">
+  <app-error [message]="errorMessage"></app-error>
 </div>

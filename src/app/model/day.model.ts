@@ -1,5 +1,5 @@
-import {KeyValue} from './key-value.model';
-import {Departure} from './departure.model';
+import {KeyValue} from "./key-value.model";
+import {Departure} from "./departure.model";
 
 export interface Day {
   avg_altitude: number;

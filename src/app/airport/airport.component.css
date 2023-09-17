@@ -1,3 +1,15 @@
+.btn {
+  margin-top: 5px;
+}
+
+.btn-primary {
+  margin-right: 10px;
+}
+
+.btn-success {
+  margin-left: 10px;
+}
+
 .table-link {
   cursor: pointer;
   color: #0069d9;
@@ -7,4 +19,23 @@
 .table-link:hover {
   color: purple;
   text-decoration: underline;
+}
+
+label {
+  margin-right: 10px;
+}
+
+input {
+  margin-right: 10px;
+  max-width: 80px;
+}
+
+small {
+  margin-left: 10px;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
 }

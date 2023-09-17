@@ -1,140 +1,153 @@
-import {Component, OnInit} from '@angular/core';
-import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip} from 'ng2-charts';
-import {DataService} from '../service/data.service';
-import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
-import {Day} from '../model/day.model';
-import {ActivatedRoute, Router} from '@angular/router';
-import {environment} from '../../environments/environment';
-import {AppComponent} from '../app.component';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Day} from "../model/day.model";
+import {DataService} from "../service/data.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ChartConfiguration, ChartType} from "chart.js";
+import {environment} from "../../environments/environment";
+import {faPlane} from '@fortawesome/free-solid-svg-icons';
+import {BaseChartDirective} from "ng2-charts";
 
 @Component({
   selector: 'app-day',
   templateUrl: './day.component.html',
-  styleUrls: ['./day.component.css', '../app.component.css']
+  styleUrls: ['./day.component.css']
 })
 export class DayComponent implements OnInit {
-  chartType: ChartType = 'line';
-  chartLabels: Label[] = [];
-  chartData: ChartDataSets[];
-  chartOptions: ChartOptions = {
-    scales: {
-      yAxes: [
-        {
-          id: 'y-axis-left',
-          position: 'left',
-          type: 'linear',
-          ticks: {
-            beginAtZero: true,
-            callback: (value: number) => {
-              if (value % 1 === 0) {
-                return value;
-              }
-            }
-          },
-          scaleLabel: {
-            display: true,
-            labelString: 'Flights'
-          }
-        }
-      ]
-    }
-  };
   day: Day;
-  loading: boolean;
+  planeIcon = faPlane;
+  @ViewChild(BaseChartDirective)
+  chart?: BaseChartDirective;
+  chartType: ChartType = 'line';
+  chartData: {
+    datasets: ({
+      data: number[];
+      label: string;
+      yAxisID: string;
+      fill: boolean;
+    })[];
+    labels: string[]
+  } = {
+    datasets: [
+      {
+        data: Array(24),
+        label: 'Absolute',
+        yAxisID: 'left',
+        fill: true,
+      },
+      {
+        data: Array(24),
+        label: 'Average',
+        yAxisID: 'left',
+        fill: false,
+      },
+      {
+        data: Array(24),
+        label: 'Wind direction',
+        yAxisID: 'right',
+        fill: false,
+      },
+    ],
+    labels: Array(24),
+  };
+  chartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    elements: {
+      line: {
+        tension: 0.5,
+      },
+    },
+    scales: {
+      left: {
+        position: 'left',
+        title: {
+          display: true,
+          text: 'Flights'
+        },
+        min: 0
+      },
+      right: {
+        position: 'right',
+        title: {
+          display: true,
+          text: 'Wind degrees'
+        },
+        min: 0,
+        max: 360,
+        grid: {
+          drawOnChartArea: false,
+        }
+      }
+    },
+  };
+  loading = true;
   error = false;
   errorMessage: string;
-  startup: boolean;
-  windDisplay: boolean;
+  windDisplay = true;
 
   constructor(private service: DataService, private route: ActivatedRoute, private router: Router) {
-    monkeyPatchChartJsTooltip();
-    monkeyPatchChartJsLegend();
   }
 
   ngOnInit() {
-    this.loading = true;
-    this.startup = AppComponent.startup;
-    const date = this.route.snapshot.params.date;
+    const date = this.route.snapshot.params['date'];
     if (!date) {
-      this.service.fetch(environment.urlBase + '/days/current').subscribe(
-        (day: Day) => {
+      this.service.fetch(environment.urlBase + '/days/current').subscribe({
+        next: (day: any) => {
           this.setData(day);
           this.loading = false;
-          this.startup = false;
-          AppComponent.startup = this.startup;
         },
-        (message) => {
+        error: (error) => {
           this.error = true;
-          this.errorMessage = message.error;
-        });
+          this.errorMessage = error.message;
+        }
+      });
     } else {
-      this.service.fetch(environment.urlBase + '/days/' + date).subscribe(
-        (day: Day) => {
+      this.service.fetch(environment.urlBase + '/days/' + date).subscribe({
+        next: (day: any) => {
           this.setData(day);
           this.loading = false;
         },
-        (message) => {
+        error: (error) => {
           this.error = true;
-          this.errorMessage = message.error;
-        });
+          this.errorMessage = error.message;
+        }
+      });
     }
-    this.chartLabels = [];
-    for (let i = 0; i < 24; i++) {
-      this.chartLabels.push(i.toString() + ':00');
+    for (let i = 0; i < this.chartData.labels.length; i++) {
+      this.chartData.labels[i] = i.toString() + ':00';
     }
   }
 
   setData(day: Day) {
     this.day = day;
     // console.log(this.day);
-    this.chartData = [];
-    this.chartData.push({data: this.day.hours_flight, label: 'Absolute', yAxisID: 'y-axis-left'});
-    this.chartData.push({
-      data: this.day.avg_flights,
-      label: 'Average (5:45-23:00h)',
-      yAxisID: 'y-axis-left',
-      fill: false
-    });
-    if (this.day.hours_wind.some(i => i > 0)) {
-      this.chartOptions.scales.yAxes.push(
-        {
-          id: 'y-axis-right',
-          position: 'right',
-          type: 'linear',
-          ticks: {
-            beginAtZero: true,
-            // max: 400,
-          },
-          scaleLabel: {
-            display: true,
-            labelString: 'Wind degrees'
-          }
-        }
-      );
-      this.chartData.push({data: this.day.hours_wind, label: 'Wind direction', yAxisID: 'y-axis-right', fill: false});
-      this.windDisplay = true;
+    for (let i = 0; i < this.chartData.datasets[0].data.length; i++) {
+      this.chartData.datasets[0].data[i] = this.day.hours_flight[i];
     }
-    this.windDisplay = false;
+    for (let i = 0; i < this.chartData.datasets[1].data.length; i++) {
+      this.chartData.datasets[1].data[i] = this.day.avg_flights[i];
+    }
+    if (this.day.hours_wind.some(w => w > 0)) {
+      for (let i = 0; i < this.chartData.datasets[2].data.length; i++) {
+        this.chartData.datasets[2].data[i] = this.day.hours_wind[i];
+      }
+    } else {
+      this.windDisplay = false;
+      this.chart?.hideDataset(2, true);
+    }
+    this.chart?.update();
   }
 
   onPrev() {
     this.service.fetch(this.day._links.prev_day.href).subscribe(
-      (day: Day) => {
+      (day: any) => {
         this.setData(day);
         this.router.navigate(['/day', this.day.date]).catch();
       });
   }
 
-  onRefresh() {
-    this.service.fetch(this.day._links.self.href).subscribe(
-      (day: Day) => {
-        this.setData(day);
-      });
-  }
-
   onNext() {
     this.service.fetch(this.day._links.next_day.href).subscribe(
-      (day: Day) => {
+      (day: any) => {
         this.setData(day);
         this.router.navigate(['/day', this.day.date]).catch();
       });
@@ -148,3 +161,4 @@ export class DayComponent implements OnInit {
     this.router.navigate(['/week', this.day.date]).catch();
   }
 }
+

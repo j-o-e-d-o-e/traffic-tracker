@@ -1,5 +1,4 @@
 <div class="container" *ngIf="!loading">
-
   <br>
   <div class="row">
     <div class="col d-flex justify-content-center">
@@ -12,11 +11,9 @@
 
   <div class="row">
     <div class="col d-flex justify-content-center">
-      <!--suppress TypeScriptUnresolvedVariable -->
       <ngb-datepicker [(ngModel)]="model"
                       [minDate]="minDate"
                       [maxDate]="maxDate"
-                      [navigation]="arrows"
                       [markDisabled]="isEnabled"
                       [showWeekNumbers]="true">
       </ngb-datepicker>
@@ -26,7 +23,7 @@
   <br>
   <div class="row btn-toolbar">
     <div class="col d-flex justify-content-center">
-      <button type="button" class="btn btn-primary" (click)="onDay()">Choose Day</button>
+      <button type="button" class="btn btn-primary" (click)="onDay()">Select Day</button>
     </div>
   </div>
 
@@ -34,7 +31,7 @@
   <div class="row">
     <div class="col d-flex justify-content-center">
       <p>
-        Years:
+        <strong>Years: </strong>
         <span *ngFor="let year of years; let i = index">
           <a class="link" (click)="onYear(year)">{{year}}</a>
           <span *ngIf="i != years.length - 1"> | </span>
@@ -42,5 +39,17 @@
       </p>
     </div>
   </div>
+  <app-footer></app-footer>
+</div>
 
+<div class="row" *ngIf="loading">
+  <div class="col">
+    <div class="text-center">
+      <app-spinner></app-spinner>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="error">
+  <app-error [message]="errorMessage"></app-error>
 </div>

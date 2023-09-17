@@ -1,25 +1,32 @@
 import {Component, OnInit} from '@angular/core';
-import {DataService} from '../service/data.service';
-import {environment} from '../../environments/environment';
-import {ForecastDay} from '../model/forecast.model';
+import {environment} from "../../environments/environment";
+import {ForecastDay} from "../model/forecast.model";
+import {DataService} from "../service/data.service";
 
 @Component({
   selector: 'app-forecast',
   templateUrl: './forecast.component.html',
-  styleUrls: ['./forecast.component.css', '../app.component.css']
+  styleUrls: ['./forecast.component.css']
 })
 export class ForecastComponent implements OnInit {
-  url: string = environment.urlBase + '/forecasts';
   forecasts: ForecastDay[];
-  active: boolean;
+  loading = true;
+  error = false;
+  errorMessage: string;
 
   constructor(private service: DataService) {
   }
 
   ngOnInit() {
-    this.service.fetch(this.url).subscribe((forecasts: ForecastDay[]) => {
-      this.setData(forecasts);
-      this.active = true;
+    this.service.fetch(environment.urlBase + '/forecasts').subscribe({
+      next:(forecasts: any) => {
+        this.setData(forecasts);
+        this.loading = false;
+      },
+      error: (error) => {
+        this.error = true;
+        this.errorMessage = error.message;
+      }
     });
   }
 
@@ -28,3 +35,4 @@ export class ForecastComponent implements OnInit {
     // console.log(this.forecast);
   }
 }
+

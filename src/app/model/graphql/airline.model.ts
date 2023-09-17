@@ -6,4 +6,3 @@ export interface Airline {
   name: string;
   flights: Flight[];
 }
-

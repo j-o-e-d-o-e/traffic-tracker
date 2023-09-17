@@ -1,27 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {environment} from '../../environments/environment';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   open = false;
-  readonly environment = environment;
-
-  constructor(private router: Router) {
-  }
-
-  ngOnInit(): void {
-  }
 
   toggle() {
     this.open = !this.open;
-  }
-
-  onHome() {
-    this.router.navigate(['home']).catch();
   }
 }
