@@ -89,29 +89,17 @@ export class DayComponent implements OnInit {
 
   ngOnInit() {
     const date = this.route.snapshot.params['date'];
-    if (!date) {
-      this.service.fetch(environment.urlBase + '/days/current').subscribe({
-        next: (day: any) => {
-          this.setData(day);
-          this.loading = false;
-        },
-        error: (error) => {
-          this.error = true;
-          this.errorMessage = error.message;
-        }
-      });
-    } else {
-      this.service.fetch(environment.urlBase + '/days/' + date).subscribe({
-        next: (day: any) => {
-          this.setData(day);
-          this.loading = false;
-        },
-        error: (error) => {
-          this.error = true;
-          this.errorMessage = error.message;
-        }
-      });
-    }
+    const path = date ? '/days/' + date : '/days/current';
+    this.service.fetch(environment.urlBase + path).subscribe({
+      next: (day: any) => {
+        this.setData(day);
+        this.loading = false;
+      },
+      error: (error) => {
+        this.error = true;
+        this.errorMessage = error.message;
+      }
+    });
     for (let i = 0; i < this.chartData.labels.length; i++) {
       this.chartData.labels[i] = i.toString() + ':00';
     }

@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "../../environments/environment";
 import {BaseChartDirective} from "ng2-charts";
 import {ChartConfiguration, ChartType} from "chart.js";
+import {faPlane} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-month',
@@ -12,6 +13,7 @@ import {ChartConfiguration, ChartType} from "chart.js";
   styleUrls: ['./month.component.css']
 })
 export class MonthComponent implements OnInit {
+  planeIcon = faPlane;
   month: Month;
   @ViewChild(BaseChartDirective)
   chart?: BaseChartDirective;
@@ -53,7 +55,8 @@ export class MonthComponent implements OnInit {
         title: {
           display: true,
           text: 'Flights'
-        }
+        },
+        min: 0
       }
     },
   };
@@ -98,6 +101,7 @@ export class MonthComponent implements OnInit {
     for (let i = 0; i < this.chartData.datasets[1].data.length; i++) {
       this.chartData.datasets[1].data[i] = this.month.avg_flights[i];
     }
+    this.chart?.update();
   }
 
   onPrev() {

@@ -1,0 +1,10 @@
+.table-link {
+  cursor: pointer;
+  color: #0069d9;
+  text-decoration: none;
+}
+
+.table-link:hover {
+  color: purple;
+  text-decoration: underline;
+}

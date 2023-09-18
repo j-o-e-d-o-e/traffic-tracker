@@ -5,6 +5,7 @@ import {DataService} from "../service/data.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BaseChartDirective} from "ng2-charts";
 import {ChartConfiguration, ChartType} from "chart.js";
+import {faPlane} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-year',
@@ -12,6 +13,7 @@ import {ChartConfiguration, ChartType} from "chart.js";
   styleUrls: ['./year.component.css']
 })
 export class YearComponent implements OnInit {
+  planeIcon = faPlane;
   year: Year;
   @ViewChild(BaseChartDirective)
   chart?: BaseChartDirective;
@@ -53,7 +55,8 @@ export class YearComponent implements OnInit {
         title: {
           display: true,
           text: 'Flights'
-        }
+        },
+        min: 0
       }
     },
   };
@@ -116,5 +119,7 @@ export class YearComponent implements OnInit {
     return new Date(this.year.start_date) <= this.startDateDepartures &&
       this.startDateDepartures <= new Date(this.year.end_date);
   }
+
+  protected readonly faPlane = faPlane;
 }
 
