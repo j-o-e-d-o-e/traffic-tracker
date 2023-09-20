@@ -48,6 +48,7 @@ export class AirlineComponent implements OnInit {
         this.router.navigate(['/airline', this.airline.icao, this.page.pageNumber]).catch();
       },
       error: (error: any) => {
+        this.loading = false;
         this.error = true;
         this.errorMessage = error.message;
       }

@@ -19,11 +19,12 @@ export class ForecastComponent implements OnInit {
 
   ngOnInit() {
     this.service.fetch(environment.urlBase + '/forecasts').subscribe({
-      next:(forecasts: any) => {
+      next: (forecasts: any) => {
         this.setData(forecasts);
         this.loading = false;
       },
       error: (error) => {
+        this.loading = false;
         this.error = true;
         this.errorMessage = error.message;
       }

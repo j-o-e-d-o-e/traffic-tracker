@@ -45,6 +45,7 @@ export class FlightComponent implements OnInit {
         this.router.navigate(['/flights', this.date, this.page.pageNumber]).catch();
       },
       error: (error: any) => {
+        this.loading = false;
         this.error = true;
         this.errorMessage = error.message;
       }

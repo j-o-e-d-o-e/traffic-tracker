@@ -77,6 +77,7 @@ export class MonthComponent implements OnInit {
         this.loading = false;
       },
       error: (message) => {
+        this.loading = false;
         this.error = true;
         this.errorMessage = message.error;
       }

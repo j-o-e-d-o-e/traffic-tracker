@@ -47,6 +47,7 @@ export class AirportComponent implements OnInit {
         this.router.navigate(['/airport', this.airport.icao, this.page.pageNumber]).catch();
       },
       error: (error: any) => {
+        this.loading = false;
         this.error = true;
         this.errorMessage = error.message;
       }

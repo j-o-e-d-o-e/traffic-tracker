@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
         this.loading = false;
       },
       error: (error) => {
+        this.loading = false;
         this.error = true;
         this.errorMessage = error.message;
       }
