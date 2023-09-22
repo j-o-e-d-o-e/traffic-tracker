@@ -78,7 +78,7 @@
   </div>
 
   <footer class="footer navbar-bottom">
-    <form (ngSubmit)="onFetch()" #form="ngForm">
+    <form id="page-size" (ngSubmit)="onFetch()" #form="ngForm">
       <label for="pageSize">Page size:</label>
       <input id="pageSize" type="number" min="5" max="50" name="pageSize" [ngModel]="size">
       <button type="submit" class="btn btn-success">Fetch</button>
