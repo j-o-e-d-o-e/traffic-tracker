@@ -1,9 +1,17 @@
-<div class="row">
-  <div class="col">
-    <p>{{message}}</p>
+<nav class="navbar">
+  <div class="ms-auto">
+    <button type="button" class="btn btn-success" (click)="onBack()">Back</button>
   </div>
-  <div class="ml-auto">
-    <button type="button" class="btn btn-success" (click)="onBack()">Back
-    </button>
+</nav>
+
+<div class="row">
+  <div class="col text-center">
+    <h3>Something went wrong...</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col text-center">
+    <p>{{message}}</p>
   </div>
 </div>

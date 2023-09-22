@@ -26,7 +26,7 @@ export class ForecastComponent implements OnInit {
       error: (error) => {
         this.loading = false;
         this.error = true;
-        this.errorMessage = error.message;
+        this.errorMessage = error.error;
       }
     });
   }

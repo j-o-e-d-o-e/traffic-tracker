@@ -10,6 +10,7 @@ import {FLIGHTS_BY_PLANE} from "./query";
 import {Flight} from "../model/graphql/flight.model";
 import {PhotoComponent} from "../photo/photo.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {GraphQLError} from "graphql/error";
 
 @Component({
   selector: 'app-plane',
@@ -47,7 +48,7 @@ export class PlaneComponent implements OnInit {
         this.setData(data.plane.flights);
         this.router.navigate(['/plane', this.icao, this.page.pageNumber]).catch();
       },
-      error: (error: any) => {
+      error: (error: GraphQLError) => {
         this.loading = false;
         this.error = true;
         this.errorMessage = error.message;

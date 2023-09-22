@@ -76,10 +76,10 @@ export class YearComponent implements OnInit {
         this.setData(year);
         this.loading = false;
       },
-      error: (message) => {
+      error: (error) => {
         this.loading = false;
         this.error = true;
-        this.errorMessage = message.error;
+        this.errorMessage = error.error;
       }
     });
   }

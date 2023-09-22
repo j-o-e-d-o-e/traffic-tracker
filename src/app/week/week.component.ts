@@ -74,10 +74,10 @@ export class WeekComponent implements OnInit {
         this.setData(week);
         this.loading = false;
       },
-      error: (message) => {
+      error: (error) => {
         this.loading = false;
         this.error = true;
-        this.errorMessage = message.error;
+        this.errorMessage = error.error;
       }
     });
   }

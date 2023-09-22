@@ -98,7 +98,7 @@ export class DayComponent implements OnInit {
       error: (error) => {
         this.loading = false;
         this.error = true;
-        this.errorMessage = error.message;
+        this.errorMessage = error.error;
       }
     });
     for (let i = 0; i < this.chartData.labels.length; i++) {

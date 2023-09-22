@@ -6,14 +6,11 @@ import {Location} from '@angular/common';
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.css']
 })
-export class ErrorComponent implements OnInit {
+export class ErrorComponent {
   @Input()
   message: string;
 
   constructor(private location: Location) {
-  }
-
-  ngOnInit() {
   }
 
   onBack() {

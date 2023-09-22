@@ -1,12 +1,14 @@
-import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
-import { HttpLink } from 'apollo-angular/http';
-import { NgModule } from '@angular/core';
-import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
+import {APOLLO_OPTIONS, ApolloModule} from 'apollo-angular';
+import {HttpLink} from 'apollo-angular/http';
+import {NgModule} from '@angular/core';
+import {ApolloClientOptions, InMemoryCache} from '@apollo/client/core';
+import {environment} from "../environments/environment";
 
-const uri = 'https://traffic-tracker-817b828649ad.herokuapp.com/graphql'; // <-- add the URL of the GraphQL server here
+const uri = environment.urlGraphQL;
+
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   return {
-    link: httpLink.create({ uri }),
+    link: httpLink.create({uri}),
     cache: new InMemoryCache(),
   };
 }
@@ -21,4 +23,5 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     },
   ],
 })
-export class GraphQLModule {}
+export class GraphQLModule {
+}

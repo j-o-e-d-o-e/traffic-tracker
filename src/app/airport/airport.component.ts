@@ -10,6 +10,7 @@ import {Flight} from "../model/graphql/flight.model";
 import {PhotoComponent} from "../photo/photo.component";
 import {environment} from "../../environments/environment";
 import {NgForm} from "@angular/forms";
+import {GraphQLError} from "graphql/error";
 
 @Component({
   selector: 'app-airport',
@@ -46,7 +47,7 @@ export class AirportComponent implements OnInit {
         this.setData(data.departure.flights);
         this.router.navigate(['/airport', this.airport.icao, this.page.pageNumber]).catch();
       },
-      error: (error: any) => {
+      error: (error: GraphQLError) => {
         this.loading = false;
         this.error = true;
         this.errorMessage = error.message;

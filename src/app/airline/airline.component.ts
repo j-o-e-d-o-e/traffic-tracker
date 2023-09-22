@@ -10,6 +10,7 @@ import {PhotoComponent} from "../photo/photo.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {environment} from "../../environments/environment";
 import {NgForm} from "@angular/forms";
+import {GraphQLError} from "graphql/error";
 
 @Component({
   selector: 'app-airline',
@@ -47,7 +48,7 @@ export class AirlineComponent implements OnInit {
         this.setData(data.airline.flights);
         this.router.navigate(['/airline', this.airline.icao, this.page.pageNumber]).catch();
       },
-      error: (error: any) => {
+      error: (error: GraphQLError) => {
         this.loading = false;
         this.error = true;
         this.errorMessage = error.message;

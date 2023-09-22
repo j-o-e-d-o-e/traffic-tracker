@@ -76,10 +76,10 @@ export class MonthComponent implements OnInit {
         this.setData(month);
         this.loading = false;
       },
-      error: (message) => {
+      error: (error) => {
         this.loading = false;
         this.error = true;
-        this.errorMessage = message.error;
+        this.errorMessage = error.error;
       }
     });
   }

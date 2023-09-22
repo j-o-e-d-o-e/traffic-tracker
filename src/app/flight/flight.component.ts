@@ -8,6 +8,7 @@ import {NgForm} from "@angular/forms";
 import {Flight} from "../model/graphql/flight.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {PhotoComponent} from "../photo/photo.component";
+import {GraphQLError} from "graphql/error";
 
 @Component({
   selector: 'app-flight',
@@ -44,7 +45,7 @@ export class FlightComponent implements OnInit {
         this.setData(data.day.flights);
         this.router.navigate(['/flights', this.date, this.page.pageNumber]).catch();
       },
-      error: (error: any) => {
+      error: (error: GraphQLError) => {
         this.loading = false;
         this.error = true;
         this.errorMessage = error.message;
