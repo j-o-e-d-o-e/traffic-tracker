@@ -36,7 +36,7 @@ export class DayComponent implements OnInit {
       },
       {
         data: Array(24),
-        label: 'Average',
+        label: 'Average (5:45-23:00h)',
         yAxisID: 'left',
         fill: false,
       },
