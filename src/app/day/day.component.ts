@@ -42,7 +42,7 @@ export class DayComponent implements OnInit {
       },
       {
         data: Array(24),
-        label: 'Wind direction',
+        label: 'Wind',
         yAxisID: 'right',
         fill: false,
       },
@@ -69,7 +69,13 @@ export class DayComponent implements OnInit {
         position: 'right',
         title: {
           display: true,
-          text: 'Wind degrees'
+          text: 'Wind directions'
+        },
+        ticks: {
+          stepSize: 45,
+          callback: (tick: number | string) => {
+            return ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', ''][+tick / 45];
+          }
         },
         min: 0,
         max: 360,
