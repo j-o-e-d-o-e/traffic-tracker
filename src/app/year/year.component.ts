@@ -44,6 +44,7 @@ export class YearComponent implements OnInit {
   };
   chartOptions: ChartConfiguration['options'] = {
     responsive: true,
+    maintainAspectRatio: false,
     elements: {
       line: {
         tension: 0.5,

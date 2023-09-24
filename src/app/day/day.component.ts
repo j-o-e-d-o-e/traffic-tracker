@@ -51,6 +51,7 @@ export class DayComponent implements OnInit {
   };
   chartOptions: ChartConfiguration['options'] = {
     responsive: true,
+    maintainAspectRatio: false,
     elements: {
       line: {
         tension: 0.5,
@@ -72,6 +73,7 @@ export class DayComponent implements OnInit {
           text: 'Wind directions'
         },
         ticks: {
+          autoSkip: false,
           stepSize: 45,
           callback: (tick: number | string) => {
             return ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', ''][+tick / 45];
