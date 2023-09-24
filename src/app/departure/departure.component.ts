@@ -28,7 +28,7 @@ export class DepartureComponent implements OnInit, OnChanges {
     ],
     labels: Array(4),
   };
-  chartOptions: ChartOptions = {responsive: true};
+  chartOptions: ChartOptions = {responsive: true, maintainAspectRatio: false};
   startDateDepartures: Date = new Date(environment.departuresStartDate);
 
   constructor() {
