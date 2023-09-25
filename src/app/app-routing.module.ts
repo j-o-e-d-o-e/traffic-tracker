@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'month/:year/:month', component: MonthComponent},
   {path: 'year', component: YearComponent},
   {path: 'year/:year', component: YearComponent},
-  {path: 'forecast', component: ForecastComponent},
+  {path: 'forecasts', component: ForecastComponent},
   {path: 'stats', component: StatsComponent},
   {path: 'flights/:date/:page', component: FlightComponent},
   {path: 'plane/:icao/:page', component: PlaneComponent},
