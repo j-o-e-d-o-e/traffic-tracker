@@ -12,7 +12,7 @@
         <a ngbDropdownToggle class="nav-link">Flights</a>
         <ul ngbDropdownMenu class="nav-menu-dropdown">
           <li class="nav-item">
-            <a ngbDropdownItem class="nav-link-dropdown" routerLinkActive="active" routerLink="day">Day</a>
+            <a ngbDropdownItem class="nav-link-dropdown" routerLinkActive="active" routerLink="day" (click)="open=false">Day</a>
           </li>
           <li class="nav-item">
             <a ngbDropdownItem class="nav-link-dropdown" routerLinkActive="active" routerLink="week" (click)="open=false">Week</a>
