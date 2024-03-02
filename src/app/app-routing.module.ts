@@ -28,11 +28,11 @@ const routes: Routes = [
   {path: 'plane/:icao/:page', component: PlaneComponent},
   {path: 'airport/:icao/:page', component: AirportComponent},
   {path: 'airline/:icao/:page', component: AirlineComponent},
-  {path: '**', redirectTo: 'day/', pathMatch: 'full'}
+  {path: '**', redirectTo: 'day', pathMatch: 'full'},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
