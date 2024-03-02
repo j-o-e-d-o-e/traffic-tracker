@@ -18,5 +18,14 @@
 </head>
 <body>
   <app-root></app-root>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', async () => {
+        await navigator.serviceWorker.register('/traffic-tracker/service-worker.js').catch(err =>
+          console.log('😥 Service worker registration failed:', err.message))
+      });
+    }
+  </script>
+
 </body>
 </html>

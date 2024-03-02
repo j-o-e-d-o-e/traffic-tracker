@@ -25,7 +25,8 @@
               "src/site.webmanifest",
               "src/favicon.ico",
               "src/icon.png",
-              "src/icon.svg"
+              "src/icon.svg",
+              "src/service-worker.js"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
