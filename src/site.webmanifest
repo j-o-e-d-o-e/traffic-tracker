@@ -1,0 +1,16 @@
+{
+  "id": "/traffic-tracker/",
+  "short_name": "TrafficTracker",
+  "name": "Traffic tracker",
+  "description": "Tracks flights to DUS airport landing from the east since 09.09.2019",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [{
+    "src": "icon.png",
+    "type": "image/png",
+    "sizes": "192x192"
+  }],
+  "start_url": "/traffic-tracker/",
+  "background_color": "#fff",
+  "theme_color": "#343a40"
+}
