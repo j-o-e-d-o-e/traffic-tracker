@@ -4,7 +4,7 @@
   "name": "Traffic tracker",
   "description": "Tracks flights to DUS airport landing from the east since 09.09.2019",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "landscape",
   "icons": [{
     "src": "icon.png",
     "type": "image/png",
